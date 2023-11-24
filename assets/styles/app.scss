@@ -1,0 +1,13 @@
+:root {
+    --primary-color: lightblue;
+    --secondary-color: lightgrey;
+    --tertiary-color: orange;
+}
+
+@import "~bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+
+body {
+    background-color: var(--primary-color);
+}
