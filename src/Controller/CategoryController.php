@@ -36,6 +36,3 @@ class CategoryController extends AbstractController
         ]);
     }
 }
-
-        // $programsByCategory = $programRepository->findByCategory($category->getId(), ['id' => 'DESC'], 3, 0 
-
