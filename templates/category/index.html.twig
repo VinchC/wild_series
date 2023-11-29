@@ -10,8 +10,8 @@
 		<div>
 			<h2>{{ loop.index }}
 				/
-				{{ category.name }}</h2>
-			<a href="{{ path('category_show', { categoryName: category.name}) }}">Lien vers la page de la catégorie</a>
+				<a href="{{ path('category_show', { categoryName: category.name}) }}">{{ category.name }}</a>
+			</h2>
 		</div>
 	{% else %}
 		<p>Aucune catégorie trouvée</p>
