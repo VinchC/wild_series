@@ -3,39 +3,38 @@
 namespace App\DataFixtures;
 
 use App\Entity\Season;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-;
+use Faker\Factory;
 
 class SeasonFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $season = new Season();
-        $season->setProgram($this->getReference('program_Wednesday'));        
-        $season->setNumber(1);
-        $season->setYear(2000);
-        $season->setDescription("Saison 1 de Wednesday");
-        $manager->persist($season);
-        $this->addReference('season1_Wednesday', $season);
+        $faker = Factory::create();
 
-        $season2 = new Season();
-        $season2->setProgram($this->getReference('program_Wednesday'));        
-        $season2->setNumber(2);
-        $season2->setYear(2001);
-        $season2->setDescription("Saison 2 de Wednesday");
-        $manager->persist($season2);
-        $this->addReference('season2_Wednesday', $season2);
+        for($categoryNumber = 1; $categoryNumber <= 6; $categoryNumber++) {
+            for($programNumber = 1; $programNumber <= 5; $programNumber++) {
+                for($seasonNumber = 1; $seasonNumber <= 5; $seasonNumber++) {
+                    $season = new Season();
+                    $season->setNumber($seasonNumber);
+                    $season->setYear($faker->year());
+                    $season->setDescription($faker->paragraphs(3, true));
+                    $season->setProgram($this->getReference('category_' . $categoryNumber . 'program_' . $programNumber));
+                    $manager->persist($season);
+                    $this->addReference('category_' . $categoryNumber . 'program_' . $programNumber . 'season_' . $seasonNumber, $season);
+                }
+            }
+        }
 
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
-        // Tu retournes ici toutes les classes de fixtures dont SeasonFixtures dépend
         return [
-          ProgramFixtures::class,
+           ProgramFixtures::class,
         ];
     }
 }
