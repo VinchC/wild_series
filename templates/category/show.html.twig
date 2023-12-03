@@ -8,9 +8,9 @@
 	{{ category.name }}
 	{% for program in programsByCategory %}
 		<div>
-			<li>Category id :
+			<li>Catégorie id :
 				{{ category.id }}</li>
-			<li>Program id :
+			<li>Série id :
 				{{ program.id }}</li>
 			<li>
 				<a href="{{ path('app_program_show', { program: program.id}) }}">{{ program.title }}</a>

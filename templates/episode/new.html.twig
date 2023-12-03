@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Episode{% endblock %}
+{% block title %}Créer un épisode
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Episode</h1>
-
-    {{ include('episode/_form.html.twig') }}
-
-    <a href="{{ path('app_episode_index') }}">back to list</a>
+	<h1>Créer un épisode</h1>
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button type="submit">Ajouter un épisode</button>
+	{{ form_end(form) }}
 {% endblock %}

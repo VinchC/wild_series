@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All categories
+{% block title %}Liste des catégories
 {% endblock %}
 
 {% block body %}
+	<h1>Liste des catégories</h1>
 	<a href="{{ path('app_category_new') }}">Créer une catégorie</a>
-	<h1>Toutes les catégories disponibles :
-	</h1>
 
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Name</th>
+				<th>Nom</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -22,13 +21,13 @@
 					<td>{{ category.id }}</td>
 					<td>{{ category.name }}</td>
 					<td>
-						<a href="{{ path('app_category_show', {categoryName: category.name}) }}">show</a>
-						<a href="{{ path('app_category_edit', {categoryName: category.name}) }}">edit</a>
+						<a href="{{ path('app_category_show', {categoryName: category.name}) }}">Voir</a>
+						<a href="{{ path('app_category_edit', {categoryName: category.name}) }}">Modifier</a>
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="5">no records found</td>
+					<td colspan="5">Aucune catégorie trouvée</td>
 				</tr>
 			{% endfor %}
 		</tbody>
