@@ -17,7 +17,7 @@
 			</p>
 			{% for season in program.seasons %}
 				<li>
-					<a href="{{ path('program_season_show', { program: program.id, season: season.id }) }}">
+					<a href="{{ path('app_program_season_show', { program: program.id, season: season.id }) }}">
 						Saison #{{ season.number }}
 					</a>
 				</li>
@@ -27,7 +27,11 @@
 		</div>
 	</div>
 
-	<a href="{{ path('program_index') }}">
+	<a href="{{ path('app_program_index') }}">
 		Retour à la liste des programmes
 	</a>
+
+	<a href="{{ path('app_program_edit', {'id': program.id}) }}">edit</a>
+
+	{{ include('program/_delete_form.html.twig') }}
 {% endblock %}
