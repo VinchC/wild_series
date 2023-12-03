@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Episode index
+{% block title %}Liste des épisodes
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('app_episode_new') }}">Create new</a>
-	<h1>Episode index</h1>
+	<h1>Liste des épisodes</h1>
+	<a href="{{ path('app_episode_new') }}">Créer un épisode</a>
 
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Program</th>
+				<th>Série</th>
 				<th>Id</th>
-				<th>Title</th>
-				<th>Number</th>
+				<th>Titre</th>
+				<th>Numéro</th>
 				<th>Synopsis</th>
 				<th>Actions</th>
 			</tr>
@@ -27,13 +27,13 @@
 					<td>{{ episode.number }}</td>
 					<td>{{ episode.synopsis }}</td>
 					<td>
-						<a href="{{ path('app_episode_show', {'id': episode.id}) }}">show</a>
-						<a href="{{ path('app_episode_edit', {'id': episode.id}) }}">edit</a>
+						<a href="{{ path('app_episode_show', {'id': episode.id}) }}">Voir</a>
+						<a href="{{ path('app_episode_edit', {'id': episode.id}) }}">Modifier</a>
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="5">no records found</td>
+					<td colspan="5">Aucun épisode trouvé</td>
 				</tr>
 			{% endfor %}
 		</tbody>

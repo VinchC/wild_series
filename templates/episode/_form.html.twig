@@ -1,4 +1,24 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="errors">
+	{{ form_errors(form) }}
+</div>
+<fieldset>
+	{{ form_errors(form.title)}}
+	{{ form_label(form.title)}}
+	{{ form_widget(form.title)}}
+	{{ form_help(form.title)}}
+	{{ form_errors(form.number)}}
+	{{ form_label(form.number)}}
+	{{ form_widget(form.number)}}
+	{{ form_help(form.number)}}
+	{{ form_errors(form.synopsis)}}
+	{{ form_label(form.synopsis)}}
+	{{ form_widget(form.synopsis)}}
+	{{ form_help(form.synopsis)}}
+	{{ form_errors(form.season)}}
+	{{ form_label(form.season)}}
+	{{ form_widget(form.season)}}
+	{{ form_help(form.season)}}
+</fieldset>
+<button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

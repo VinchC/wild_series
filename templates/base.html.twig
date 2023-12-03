@@ -3,27 +3,32 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Wild Series
 			{% endblock %}
 		</title>
 		<link rel="icon" href="{{ asset('./build/images/favicon.jpg') }}" alt="favicon"/>
 		{% block stylesheets %}
-		    {{ encore_entry_link_tags('app') }}
+			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 
 		{% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
 
-{# <img src="{{ asset('build/path_to_image.png') }}" alt=""/> #}
+	{# <img src="{{ asset('build/path_to_image.png') }}" alt=""/> #}
 
 	<body>
-	<header>
-	{% block navbar %}{{ include('./navbar/_navbar.html.twig') }}{% endblock %}
-	</header>
-	{% block body %}
-		{% block content %}{% endblock %}
-	{% endblock %}
+		<header>
+			{% block navbar %}
+				{{ include('./navbar/_navbar.html.twig') }}
+			{% endblock %}
+		</header>
+		<main>
+			{% block body %}
+				{% block content %}{% endblock %}
+			{% endblock %}
+			<main></body>
+		</html>
 	</body>
 </html>

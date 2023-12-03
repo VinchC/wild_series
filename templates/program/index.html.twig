@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All programs
+{% block title %}Liste des séries
 {% endblock %}
 
 {% block body %}
+	<h1>Liste des séries</h1>
 	<a href="{{ path('app_program_new') }}">Créer une série</a>
-	<h1>Toutes les séries</h1>
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -24,13 +25,14 @@
 					<td>{{ program.category.name }}</td>
 					<td>{{ program.synopsis }}</td>
 					<td>
-						<a href="{{ path('app_program_show', { program: program.id }) }}">show</a>
-						<a href="{{ path('app_program_edit', { 'id': program.id }) }}">edit</a>
+						<a href="{{ path('app_program_show', { program: program.id }) }}">Voir</a>
+						<a href="{{ path('app_program_edit', { 'id': program.id }) }}">Modifier</a>
 					</td>
 				</tr>
-			</tbody>
-		{% else %}
-			<p>Aucune série trouvée</p>
-		{% endfor %}
-		<a href="{{ path('app_index') }}">Retour à l'accueil</a>
-	{% endblock %}
+
+			{% else %}
+				<p>Aucune série trouvée</p>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

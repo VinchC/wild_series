@@ -15,7 +15,16 @@ header {
     width: 100%;
 }
 
-body {
+main {
+    width: 90%;
+    margin: 4rem auto auto auto;
+}
+
+.container-fluid {
     background-color: var(--primary-color);
-    margin-top: 4rem;
+    height: 4rem;
+}
+
+.navbar {
+    padding: 0;
 }
