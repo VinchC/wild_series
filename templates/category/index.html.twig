@@ -4,19 +4,35 @@
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('category_new') }}">Créer une catégorie</a>
+	<a href="{{ path('app_category_new') }}">Créer une catégorie</a>
 	<h1>Toutes les catégories disponibles :
 	</h1>
-	{% for category in categories %}
-		<div>
-			<h2>{{ loop.index }}
-				/
-				<a href="{{ path('category_show', { categoryName: category.name}) }}">{{ category.name }}</a>
-			</h2>
-		</div>
-	{% else %}
-		<p>Aucune catégorie trouvée</p>
-	{% endfor %}
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for category in categories %}
+				<tr>
+					<td>{{ category.id }}</td>
+					<td>{{ category.name }}</td>
+					<td>
+						<a href="{{ path('app_category_show', {categoryName: category.name}) }}">show</a>
+						<a href="{{ path('app_category_edit', {categoryName: category.name}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
 	<a href="{{ path('app_index') }}">Retour à l'accueil</a>
 {% endblock %}

@@ -13,7 +13,7 @@
 			<li>Program id :
 				{{ program.id }}</li>
 			<li>
-				<a href="{{ path('program_show', { program: program.id}) }}">{{ program.title }}</a>
+				<a href="{{ path('app_program_show', { program: program.id}) }}">{{ program.title }}</a>
 			</li>
 			<p>{{ program.synopsis }}</p>
 		</div>
@@ -21,7 +21,7 @@
 		<p>Aucune série trouvée</p>
 	{% endfor %}
 
-	<a href="{{ path('category_index') }}">
+	<a href="{{ path('app_category_index') }}">
 		Retour à la liste des catégories
 	</a>
 {% endblock %}

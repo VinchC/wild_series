@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -15,11 +16,20 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(
+        message: "t'as oublié de me renseigner !"
+    )]
+    #[Assert\Length(
+        min: 3,
+        minMessage: "C'est beaucoup trop court !",
+        max: 255,
+        maxMessage: "C'est beaucoup trop long !"
+    )]
+    private $name;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Program::class)]
-    private $programs;
+    private ?Collection $programs;
 
     public function __construct()
     {
