@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Saison #
+{% block title %}Série {{ program.title }} - Saison #
 	{{ season.number }}
 {% endblock %}
 
@@ -18,31 +18,36 @@
 			<p>Description de la saison :
 				{{ season.description }}
 			</p>
-			<h2>Liste des épisodes</h2>
+		</div>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Catégorie série</th>
+				<th>Titre épisode</th>
+				<th>Numéro épisode</th>
+				<th>Synopsis épisode</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
 			{% for episode in episodes %}
-				<ul>
-					<li>
-						<h3>Titre :
-							<a href="{{ path('app_program_episode_show', { program: program.id, season: season.id, episode: episode.id }) }}">
-								{{ episode.title }}</a>
-						</h3>
-					</li>
-					<ul>
-						<li>
-							Numéro de l'épisode :
-							{{ episode.number }}
-						</li>
-						<li>
-							Synopsis de l'épisode :
-							{{ episode.synopsis }}
-						</li>
-					</ul>
-				</ul>
+				<tr>
+					<td>{{ program.category.name }}</td>
+					<td>{{ episode.title }}</td>
+					<td>{{ episode.number }}</td>
+					<td>{{ episode.synopsis }}</td>
+					<td>
+						<a href="{{ path('app_program_episode_show', { program: program.id, season: season.id, episode: episode.id }) }}">Voir</a>
+						<a href="{{ path('app_episode_edit', { 'id': episode.id }) }}">Modifier</a>
+					</td>
+				</tr>
 			{% else %}
 				<p>Aucun épisode trouvé</p>
 			{% endfor %}
-		</div>
-	</div>
+		</tbody>
+	</table>
 
 	<a href="{{ path('app_program_show', { program: program.id }) }}">
 		Retour à la page de la série

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Season;
 use App\Entity\Episode;
 use App\Entity\Program;
@@ -13,23 +12,34 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 #[Route('/program', name: 'app_program_')]
 class ProgramController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(ProgramRepository $programRepository): Response
+    public function index(RequestStack $requestStack, ProgramRepository $programRepository): Response
     {
+        $session = $requestStack->getSession();
+        if (!$session->has('total')) {
+            $session->set('total', 0); // if total doesn’t exist in session, it is initialized.
+        }   
+
+        $total = $session->get('total');
+
         $programs = $programRepository->findAll();
         return $this->render('program/index.html.twig', [
             'programs' => $programs,
         ]);
     }
 
-    #[Route('/new', name: 'new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('/new', methods: ['GET', 'POST'], name: 'new')]
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager
+    ): Response {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
@@ -37,6 +47,8 @@ class ProgramController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($program);
             $entityManager->flush();
+            $this->addFlash('success', 'La série a bien été créée !');
+            
             return $this->redirectToRoute('app_program_index');
         }
         return $this->render('program/new.html.twig', [
@@ -65,6 +77,7 @@ class ProgramController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('warning', 'La série a bien été modifiée !');
 
             return $this->redirectToRoute('app_program_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -81,6 +94,7 @@ class ProgramController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
             $entityManager->remove($program);
             $entityManager->flush();
+            $this->addFlash('danger', 'La série a bien été supprimée !');
         }
 
         return $this->redirectToRoute('app_program_index', [], Response::HTTP_SEE_OTHER);

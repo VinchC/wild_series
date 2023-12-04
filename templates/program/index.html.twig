@@ -27,6 +27,7 @@
 					<td>
 						<a href="{{ path('app_program_show', { program: program.id }) }}">Voir</a>
 						<a href="{{ path('app_program_edit', { 'id': program.id }) }}">Modifier</a>
+						{{ include('program/_delete_form.html.twig') }}
 					</td>
 				</tr>
 
