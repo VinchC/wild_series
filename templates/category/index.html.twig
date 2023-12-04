@@ -23,6 +23,7 @@
 					<td>
 						<a href="{{ path('app_category_show', {categoryName: category.name}) }}">Voir</a>
 						<a href="{{ path('app_category_edit', {categoryName: category.name}) }}">Modifier</a>
+						{{ include('category/_delete_form.html.twig') }}
 					</td>
 				</tr>
 			{% else %}

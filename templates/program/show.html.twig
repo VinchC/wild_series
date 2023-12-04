@@ -16,10 +16,8 @@
 				{{ program.category.name }}
 			</p>
 			{% for season in program.seasons %}
-				<li>
-					<a href="{{ path('app_program_season_show', { program: program.id, season: season.id }) }}">
-						Saison #{{ season.number }}
-					</a>
+				<li>				
+					Saison <a href="{{ path('app_program_season_show', { program: program.id, season: season.id }) }}"># {{ season.number }}</a>
 				</li>
 			{% else %}
 				<p>Aucune saison trouvée</p>
@@ -27,9 +25,11 @@
 		</div>
 	</div>
 
-	<a href="{{ path('app_program_index') }}">
-		Retour à la liste des programmes
-	</a>
+	<div>
+		<a href="{{ path('app_program_index') }}">
+			Retour à la liste des programmes
+		</a>
+	</div>
 
 	<a href="{{ path('app_program_edit', {'id': program.id}) }}">Modifier</a>
 

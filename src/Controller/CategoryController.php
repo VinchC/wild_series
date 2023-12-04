@@ -10,22 +10,32 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/category', name: 'app_category_')]
 class CategoryController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(RequestStack $requestStack, CategoryRepository $categoryRepository): Response
     {
+        $session = $requestStack->getSession();
+        if (!$session->has('total')) {
+            $session->set('total', 0);
+        }
+        $total = $session->get('total');
         $categories = $categoryRepository->findAll();
-        return $this->render('category/index.html.twig', ['categories' => $categories,
+        return $this->render('category/index.html.twig', [
+            'categories' => $categories,
+            'total' => $total,
         ]);
     }
 
-    #[Route('/new', name: 'new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('/new', methods: ['GET', 'POST'], name: 'new')]
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager
+    ): Response {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -33,6 +43,8 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($category);
             $entityManager->flush();
+            $this->addFlash('success', 'La nouvelle série a bien été créée !');
+
             return $this->redirectToRoute('app_category_index');
         }
         return $this->render('category/new.html.twig', [
@@ -48,7 +60,7 @@ class CategoryController extends AbstractController
                 'No category with name ' .$categoryName. ' found in category\'s table.'
             );
         }
-        $programsByCategory = $programRepository->findByCategory($category, ['id' => 'DESC'], 3, 0);
+        $programsByCategory = $programRepository->findByCategory($category, ['id' => 'DESC'], 50, 0);
 
         return $this->render('category/show.html.twig', [
             'programsByCategory' => $programsByCategory,
@@ -70,7 +82,7 @@ class CategoryController extends AbstractController
         }
 
         return $this->render('category/edit.html.twig', [
-            'episode' => $category,
+            'category' => $category,
             'form' => $form,
         ]);
     }

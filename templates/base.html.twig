@@ -25,6 +25,14 @@
 			{% endblock %}
 		</header>
 		<main>
+			{# {{ app.session.get('total') }} #}
+			{% for category, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
 			{% block body %}
 				{% block content %}{% endblock %}
 			{% endblock %}
