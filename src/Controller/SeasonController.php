@@ -32,7 +32,7 @@ class SeasonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($season);
             $entityManager->flush();
-            $this->addFlash('success', 'La série a bien été créée !');
+            $this->addFlash('success', 'La saison a bien été créée !');
 
             return $this->redirectToRoute('app_season_index', [], Response::HTTP_SEE_OTHER);
         }
