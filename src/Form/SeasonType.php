@@ -30,7 +30,10 @@ class SeasonType extends AbstractType
                 ],
                 'label' => 'Description'
                 ])
-            ->add('program', null, ['choice_label' => 'title'])
+            ->add('program', null, [
+                'choice_label' => 'title',
+                'label' => 'Série'
+            ])
         ;
     }
 

@@ -5,8 +5,5 @@
 
 {% block body %}
 	<h1>Créer une saison</h1>
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	<button type="submit">Ajouter une saison</button>
-	{{ form_end(form) }}
+	{{ include('season/_form.html.twig')}}
 {% endblock %}
