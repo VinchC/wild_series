@@ -10,6 +10,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th>Id</th>
 				<th>Titre</th>
 				<th>Catégorie</th>
 				<th>Synopsis</th>
@@ -19,6 +20,7 @@
 		<tbody>
 			{% for program in programs %}
 				<tr>
+					<td>{{ program.id }}</td>
 					<td>
 						<a href="{{ path('app_program_show', { program: program.id}) }}">{{ program.title }}</a>
 					</td>
