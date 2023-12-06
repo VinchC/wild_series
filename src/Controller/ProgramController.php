@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -38,13 +39,16 @@ class ProgramController extends AbstractController
     #[Route('/new', methods: ['GET', 'POST'], name: 'new')]
     public function new(
         Request $request, 
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger
     ): Response {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugger->slug($program->getTitle());
+            $program->setSlug($slug);
             $entityManager->persist($program);
             $entityManager->flush();
             $this->addFlash('success', 'La série a bien été créée !');
@@ -56,7 +60,7 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{program}', requirements: ['program'=>'\d+'], methods: ['GET'], name: 'show')]
+    #[Route('/{slug}', requirements: ['program'=>'\d+'], methods: ['GET'], name: 'show')]
     public function show(Program $program): Response 
     {
         if (!$program) {
@@ -100,7 +104,7 @@ class ProgramController extends AbstractController
         return $this->redirectToRoute('app_program_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{program}/season/{season}', requirements: ['program'=>'\d+', 'season'=>'\d+'], methods: ['GET'], name: 'season_show')]
+    #[Route('/{slug}/season/{season}', requirements: ['program'=>'\d+', 'season'=>'\d+'], methods: ['GET'], name: 'season_show')]
     public function showSeason(Program $program, Season $season, EpisodeRepository $episodeRepository): Response 
     {
         if (!$program) {

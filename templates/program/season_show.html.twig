@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Série {{ program.title }} - Saison #
+{% block title %}Série
+	{{ program.title }}
+	- Saison #
 	{{ season.number }}
 {% endblock %}
 
@@ -49,7 +51,7 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_program_show', { program: program.id }) }}">
+	<a href="{{ path('app_program_show', { slug: program.slug }) }}">
 		Retour à la page de la série
 	</a>
 {% endblock %}

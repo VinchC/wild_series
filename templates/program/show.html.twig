@@ -18,7 +18,7 @@
 			{% for season in program.seasons %}
 				<li>
 					Saison
-					<a href="{{ path('app_program_season_show', { program: program.id, season: season.id }) }}">#
+					<a href="{{ path('app_program_season_show', { slug: program.slug, season: season.id }) }}">#
 						{{ season.number }}</a>
 				</li>
 			{% else %}
