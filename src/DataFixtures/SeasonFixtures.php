@@ -14,17 +14,15 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        for($categoryNumber = 1; $categoryNumber <= 6; $categoryNumber++) {
-            for($programNumber = 1; $programNumber <= 5; $programNumber++) {
-                for($seasonNumber = 1; $seasonNumber <= 5; $seasonNumber++) {
-                    $season = new Season();
-                    $season->setNumber($seasonNumber);
-                    $season->setYear($faker->year());
-                    $season->setDescription($faker->paragraphs(3, true));
-                    $season->setProgram($this->getReference('category_' . $categoryNumber . 'program_' . $programNumber));
-                    $manager->persist($season);
-                    $this->addReference('category_' . $categoryNumber . 'program_' . $programNumber . 'season_' . $seasonNumber, $season);
-                }
+        for($programNumber = 1; $programNumber <= count(ProgramFixtures::PROGRAMS); $programNumber++) {
+            for($seasonNumber = 1; $seasonNumber <= 5; $seasonNumber++) {
+                $season = new Season();
+                $season->setNumber($seasonNumber);
+                $season->setYear($faker->year());
+                $season->setDescription($faker->paragraphs(1, true));
+                $season->setProgram($this->getReference('program_' . $programNumber));
+                $manager->persist($season);
+                $this->addReference('program_' . $programNumber . 'season_' . $seasonNumber, $season);
             }
         }
 
