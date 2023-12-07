@@ -1,11 +1,13 @@
 {% extends 'layoutEmail.html.twig' %}
 
 {% block body %}
-	{% block content %}{% endblock %}
-	<h1>Nouvel épisode
-		{{ episode.title }}
-		créé !</h1>
-	<p>Un nouvel épisode vient d'être publié sur Wild Series !</p>
-	<p>Synopsis :
-		{{episode.synopsis }}</p>
+	{% block content %}
+		{{ parent() }}
+		<h1>Nouvel épisode
+			{{ episode.title }}
+			créé !</h1>
+		<p>Un nouvel épisode vient d'être publié sur Wild Series !</p>
+		<p>Synopsis :
+			{{episode.synopsis }}</p>
+	{% endblock %}
 {% endblock %}
