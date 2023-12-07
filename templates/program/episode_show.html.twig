@@ -9,7 +9,8 @@
 		<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
 		<div class="media-body">
 			<h1 class="mt-0">
-				Titre de l'épisode : {{ episode.title }}</h1>
+				Titre de l'épisode :
+				{{ episode.title }}</h1>
 			<p>Episode #
 				{{ episode.number }}
 				de la saison
@@ -17,19 +18,22 @@
 				de la série
 				{{ program.title }}
 				({{ season.year }})</p>
-			<p><b>Résumé de la série :</b>
+			<p>
+				<b>Résumé de la série :</b>
 				{{ program.synopsis }}</p>
-			<p><b>Description de la saison :</b>
+			<p>
+				<b>Description de la saison :</b>
 				{{ season.description }}
 			</p>
-			<p><b>Description de l'épisode :</b>
+			<p>
+				<b>Description de l'épisode :</b>
 				{{ episode.synopsis }}
 			</p>
 		</div>
 	</div>
 
-	<a href="{{ path('app_episode_edit', { 'id': episode.id }) }}">Modifier</a>
-	<a href="{{ path('app_program_season_show', { program: program.id, season: season.id }) }}">
+	<a href="{{ path('app_episode_edit', { episodeSlug: episode.slug }) }}">Modifier</a>
+	<a href="{{ path('app_program_season_show', { programSlug: program.slug, season: season.id }) }}">
 		Retour à la page de la saison
 	</a>
 {% endblock %}
