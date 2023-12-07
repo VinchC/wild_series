@@ -9,12 +9,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 #[UniqueEntity(
     'title',
     message: 'ce titre existe déjà'
 )]
+#[Vich\Uploadable]
 class Program
 {
     #[ORM\Id]
@@ -43,8 +46,11 @@ class Program
     )]
     private $synopsis = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $poster = null;
+
+    #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
+     private ?File $posterFile = null;
 
     #[ORM\ManyToOne(inversedBy: 'programs')]
     #[ORM\JoinColumn(nullable: false)]
@@ -186,4 +192,16 @@ class Program
 
         return $this;
     }
+
+     public function getPosterFile(): ?File
+     {
+          return $this->posterFile;
+     }
+
+     public function setPosterFile(File $image = null): Program
+     {
+          $this->posterFile = $image;
+
+          return $this;
+     }
 }
