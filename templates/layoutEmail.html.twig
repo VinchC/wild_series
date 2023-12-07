@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Wild Series
-			{% endblock %}
-		</title>
-		<link rel="icon" href="{{ asset('./build/images/favicon.jpg') }}" alt="favicon"/>
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-		{% endblock %}
+{% extends 'base.html.twig' %}
 
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-		{% endblock %}
-	</head>
-
-
-	<body>
-		<header>
-			{% block navbar %}
-				{{ include('./navbar/_navbar.html.twig') }}
-			{% endblock %}
-		</header>
-		<main>
-			{% block body %}
-				{% block content %}
-					<p>Merci d'avoir contribué au contenu de Wild Series !</p>
-				{% endblock %}
-			{% endblock %}
-			<main></body>
-		</html>
-	</body>
-</html>
+{% block content %}
+	{{ parent() }}
+	<p>Merci d'avoir contribué au contenu de Wild Series !</p>
+{% endblock %}
