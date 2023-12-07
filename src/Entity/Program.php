@@ -57,7 +57,7 @@ class Program
     private Collection $actors;
 
     #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+    private ?string $programSlug = null;
 
     public function __construct()
     {
@@ -177,12 +177,12 @@ class Program
 
     public function getSlug(): ?string
     {
-        return $this->slug;
+        return $this->programSlug;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(string $programSlug): static
     {
-        $this->slug = $slug;
+        $this->programSlug = $programSlug;
 
         return $this;
     }

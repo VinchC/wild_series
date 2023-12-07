@@ -41,8 +41,8 @@
 					<td>{{ episode.number }}</td>
 					<td>{{ episode.synopsis }}</td>
 					<td>
-						<a href="{{ path('app_program_episode_show', { program: program.id, season: season.id, episode: episode.id }) }}">Voir</a>
-						<a href="{{ path('app_episode_edit', { 'id': episode.id }) }}">Modifier</a>
+						<a href="{{ path('app_program_episode_show', { programSlug: program.slug, season: season.id, episodeSlug: episode.slug }) }}">Voir</a>
+						<a href="{{ path('app_episode_edit', { episodeSlug: episode.slug }) }}">Modifier</a>
 					</td>
 				</tr>
 			{% else %}
@@ -51,7 +51,7 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_program_show', { slug: program.slug }) }}">
+	<a href="{{ path('app_program_show', { programSlug: program.slug }) }}">
 		Retour à la page de la série
 	</a>
 {% endblock %}

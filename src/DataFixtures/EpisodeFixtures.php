@@ -26,12 +26,14 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
             $programName = $this->slugger->slug(ProgramFixtures::PROGRAMS[$programNumber]['title']);
             for($seasonNumber = 1; $seasonNumber <= 5; $seasonNumber++) {
                 for($episodeNumber = 1; $episodeNumber <= 10; $episodeNumber++) {
-
                     $episode = new Episode();
                     $episode->setSeason($this->getReference('program_' . $programName . 'season_' . $seasonNumber));        
-                    $episode->setTitle($faker->title());        
+                    $episode->setTitle($faker->title());
+                    $episodeSlug = $this->slugger->slug($episode->getTitle());        
                     $episode->setNumber($episodeNumber);
+                    $episode->setDuration(52);
                     $episode->setSynopsis($faker->paragraphs(1, true));
+                    $episode->setSlug($episodeSlug);
                     $manager->persist($episode);
                 }
             }

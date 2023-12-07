@@ -15,10 +15,13 @@
 			<p>Catégorie :
 				{{ program.category.name }}
 			</p>
+			<p>Durée totale :
+				{{ programDuration }}
+			</p>
 			{% for season in program.seasons %}
 				<li>
 					Saison
-					<a href="{{ path('app_program_season_show', { slug: program.slug, season: season.id }) }}">#
+					<a href="{{ path('app_program_season_show', { programSlug: program.slug, season: season.id }) }}">#
 						{{ season.number }}</a>
 				</li>
 			{% else %}
@@ -45,7 +48,7 @@
 		</a>
 	</div>
 
-	<a href="{{ path('app_program_edit', {'id': program.id}) }}">Modifier</a>
+	<a href="{{ path('app_program_edit', {programSlug: program.slug}) }}">Modifier</a>
 
 	{{ include('program/_delete_form.html.twig') }}
 {% endblock %}

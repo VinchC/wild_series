@@ -31,6 +31,12 @@ class Episode
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
 
+    #[ORM\Column]
+    private ?int $duration = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $episodeSlug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,6 +86,30 @@ class Episode
     public function setSynopsis(string $synopsis): static
     {
         $this->synopsis = $synopsis;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): static
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->episodeSlug;
+    }
+
+    public function setSlug(string $episodeSlug): static
+    {
+        $this->episodeSlug = $episodeSlug;
 
         return $this;
     }

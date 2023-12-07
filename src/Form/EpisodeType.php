@@ -2,12 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Season;
 use App\Entity\Episode;
-use App\Entity\Program;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EpisodeType extends AbstractType
@@ -33,6 +30,12 @@ class EpisodeType extends AbstractType
                     'placeholder' => 'Indiquez le synopsis',
                 ],
                 'label' => 'Synopsis'
+                ])
+            ->add('duration', null, [
+                'attr' => [
+                    'placeholder' => 'Indiquez la durée',
+                ],
+                'label' => 'Durée'
                 ])
             ->add('season', null, [
                 'label' => 'Numéro de la saison',
