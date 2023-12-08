@@ -6,6 +6,7 @@ use App\Entity\Actor;
 use App\Entity\Program;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +19,7 @@ class ProgramType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => [
-                    'placeholder' => 'Indiquez un titre',
+                    'placeholder' => 'Indiquez le titre',
                 ],
                 'label' => 'Titre'
                 ])
@@ -28,8 +29,11 @@ class ProgramType extends AbstractType
                 ],
                 'label' => 'Synopsis'
                 ])
-            ->add('poster', TextType::class, [
-                    'label' => 'Image'
+            ->add('posterFile', VichFileType::class, [
+                'required'      => false,
+                'allow_delete'  => false,
+                'download_uri' => false,
+                'label' => 'Image'
                 ])
             ->add('category', EntityType::class, [
                 'label' => 'Catégorie',

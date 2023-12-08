@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProgramRepository;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -15,6 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     'title',
     message: 'ce titre existe déjà'
 )]
+#[Vich\Uploadable]
 class Program
 {
     #[ORM\Id]
@@ -43,8 +48,18 @@ class Program
     )]
     private $synopsis = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $poster = null;
+
+    #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
+    #[Assert\File(
+        maxSize: '1M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
+    )]
+    private ?File $posterFile = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DatetimeInterface $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'programs')]
     #[ORM\JoinColumn(nullable: false)]
@@ -148,9 +163,6 @@ class Program
         return $this;
     }
 
-    /**
-     * @return Collection<int, Actor>
-     */
     public function getActors(): Collection
     {
         return $this->actors;
@@ -183,6 +195,33 @@ class Program
     public function setSlug(string $programSlug): static
     {
         $this->programSlug = $programSlug;
+
+        return $this;
+    }
+
+     public function getPosterFile(): ?File
+     {
+          return $this->posterFile;
+     }
+
+     public function setPosterFile(File $image = null): Program
+     {
+        $this->posterFile = $image;
+        if ($image) {
+          $this->updatedAt = new DateTime('now');
+        }
+
+          return $this;
+     }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
