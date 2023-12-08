@@ -6,6 +6,10 @@
 {% block body %}
 	<h1>Acteur</h1>
 
+	<div class="media">
+		<img class="align-self-start mr-3" src="{{ vich_uploader_asset(actor) }}" alt="{{ actor.lastname }} poster">
+	</div>
+
 	<table class="table">
 		<tbody>
 			<tr>
