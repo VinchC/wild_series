@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
-use App\Repository\CommentRepository;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -31,8 +32,13 @@ class Comment
     #[Assert\Positive]
     private ?int $rate = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DatetimeInterface $updatedAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private DateTimeImmutable $updatedAt;
+
+    public function __construct()
+    {
+        $this->updatedAt = new DateTimeImmutable('now');
+    }
 
     public function getId(): ?int
     {
@@ -87,20 +93,12 @@ class Comment
         return $this;
     }
 
-    /**
-     * Get the value of updatedAt
-     */ 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Set the value of updatedAt
-     *
-     * @return  self
-     */ 
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(DateTimeImmutable $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

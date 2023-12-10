@@ -25,7 +25,7 @@
 			{% endblock %}
 		</header>
 		<main>
-			{{ app.session.get('total') }}
+			{# {{ app.session.get('total') }} #}
 			{% for category, messages in app.flashes %}
 				{% for message in messages %}
 					<div class="alert alert-{{ category }}">
@@ -33,10 +33,6 @@
 					</div>
 				{% endfor %}
 			{% endfor %}
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<p>Email:
-					{{ app.user.email }}</p>
-			{% endif %}
 			{% block body %}
 				{% block content %}{% endblock %}
 			{% endblock %}
