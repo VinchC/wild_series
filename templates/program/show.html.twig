@@ -41,14 +41,14 @@
 			<li>Aucun acteur pour cette série</li>
 		{% endfor %}
 	</ul>
+</ul>
 
-	<div>
-		<a href="{{ path('app_program_index') }}">
-			Retour à la liste des programmes
-		</a>
-	</div>
+<div>
+	<a href="{{ path('app_program_index') }}">
+		Retour à la liste des programmes
+	</a>
+</div>
 
-	<a href="{{ path('app_program_edit', {programSlug: program.slug}) }}">Modifier</a>
+<a href="{{ path('app_program_edit', {programSlug: program.slug}) }}">Modifier</a>
 
-	{{ include('program/_delete_form.html.twig') }}
-{% endblock %}
+{{ include('program/_delete_form.html.twig') }}{% endblock %}
