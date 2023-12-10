@@ -33,7 +33,7 @@ class Program
     )]
     #[Assert\Length(
         max: 255,
-        maxMessage: "C'est beaucoup trop long !"
+        maxMessage: "C'est beaucoup trop long (moins de 255 caractères) !"
     )]
     private $title = null;
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,11 +25,14 @@ class Comment
     private ?Episode $episode = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $comment = null;
+    private ?string $content = null;
 
     #[ORM\Column]
     #[Assert\Positive]
     private ?int $rate = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DatetimeInterface $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -59,14 +63,14 @@ class Comment
         return $this;
     }
 
-    public function getComment(): ?string
+    public function getContent(): ?string
     {
-        return $this->comment;
+        return $this->content;
     }
 
-    public function setComment(string $comment): static
+    public function setContent(string $content): static
     {
-        $this->comment = $comment;
+        $this->content = $content;
 
         return $this;
     }
@@ -79,6 +83,26 @@ class Comment
     public function setRate(int $rate): static
     {
         $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updatedAt
+     */ 
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set the value of updatedAt
+     *
+     * @return  self
+     */ 
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

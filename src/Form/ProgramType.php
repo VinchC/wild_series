@@ -19,7 +19,7 @@ class ProgramType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => [
-                    'placeholder' => 'Indiquez le titre',
+                    'placeholder' => 'Renseignez le titre',
                 ],
                 'label' => 'Titre'
                 ])

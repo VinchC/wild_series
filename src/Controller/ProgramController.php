@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Season;
+use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
+use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\Service\ProgramDuration;
+use Symfony\Component\Mime\Email;
+use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +19,6 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -36,6 +39,7 @@ class ProgramController extends AbstractController
         $programs = $programRepository->findAll();
         return $this->render('program/index.html.twig', [
             'programs' => $programs,
+            'total' => $total,
         ]);
     }
 
@@ -141,9 +145,26 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{programSlug}/season/{season}/episode/{episodeSlug}', requirements: ['program'=>'\d+', 'season'=>'\d+', 'episode'=>'\d+'], methods: ['GET'], name: 'episode_show')]
-    public function showEpisode(Program $program, Season $season, Episode $episode): Response 
+    #[Route('/{programSlug}/season/{season}/episode/{episodeSlug}', requirements: ['program'=>'\d+', 'season'=>'\d+', 'episode'=>'\d+'], methods: ['GET', 'POST'], name: 'episode_show')]
+    public function showEpisode(Program $program, Season $season, Episode $episode, Request $request, EpisodeRepository $episodeRepository, EntityManagerInterface $entityManager): Response 
     {
+        $comment = new Comment();
+        $user = $this->getUser();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setEpisode($episode);
+            $comment->setAuthor($user);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $this->addFlash('success', 'Le commentaire a bien été créé !');
+
+            $episodesBySeason = $episodeRepository->findBySeason($season);
+            return $this->render('program/season_show.html.twig', [
+                'program' => $program, 'season' => $season, 'episodes' => $episodesBySeason,
+            ]);            
+        }
+
         if (!$program) {
             throw $this->createNotFoundException(
                 'No program with name ' .$program->title. ' found in program\'s table.'
@@ -152,7 +173,7 @@ class ProgramController extends AbstractController
 
         if (!$season) {
             throw $this->createNotFoundException(
-                'No season with name ' .$season->number. ' found in season\'s table.'
+                'No season with number ' .$season->number. ' found in season\'s table.'
             );
         }
 
@@ -163,7 +184,7 @@ class ProgramController extends AbstractController
         }
 
         return $this->render('program/episode_show.html.twig', [
-            'program' => $program, 'season' => $season, 'episode' => $episode,
+            'program' => $program, 'season' => $season, 'episode' => $episode, 'form' => $form,
         ]);
     }
 

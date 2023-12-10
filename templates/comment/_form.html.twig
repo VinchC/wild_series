@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="errors">
+	{{ form_errors(form) }}
+</div>
+<fieldset>
+	{{ form_errors(form.content)}}
+	{{ form_label(form.content)}}
+	{{ form_widget(form.content)}}
+	{{ form_help(form.content)}}
+	{{ form_errors(form.rate)}}
+	{{ form_label(form.rate)}}
+	{{ form_widget(form.rate)}}
+	{{ form_help(form.rate)}}
+</fieldset>
+<button type="submit">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

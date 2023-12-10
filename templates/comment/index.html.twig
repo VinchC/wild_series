@@ -10,9 +10,10 @@
 		<thead>
 			<tr>
 				<th>Id</th>
+				<th>Série</th>
+				<th>Episode</th>
 				<th>Commentaire</th>
 				<th>Note</th>
-				<th>Episode</th>
 				<th>Utilisateur</th>
 				<th>Actions</th>
 			</tr>
@@ -21,9 +22,10 @@
 			{% for comment in comments %}
 				<tr>
 					<td>{{ comment.id }}</td>
-					<td>{{ comment.comment }}</td>
-					<td>{{ comment.rate }}</td>
+					<td>{{ comment.episode.season.program.title }}</td>
 					<td>{{ comment.episode.title }}</td>
+					<td>{{ comment.content }}</td>
+					<td>{{ comment.rate }}</td>
 					<td>{{ comment.author.firstname }}</td>
 					<td>
 						<a href="{{ path('app_comment_show', {'id': comment.id}) }}">Voir</a>
