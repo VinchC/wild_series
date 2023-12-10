@@ -19,11 +19,13 @@ class CommentType extends AbstractType
             ->add('rate')
             ->add('author', EntityType::class, [
                 'class' => User::class,
-'choice_label' => 'id',
+                'choice_label' => 'firstname',
+                'label' => 'Prénom'
             ])
             ->add('episode', EntityType::class, [
                 'class' => Episode::class,
-'choice_label' => 'id',
+                'choice_label' => 'title',
+                'label' => 'Titre'
             ])
         ;
     }
