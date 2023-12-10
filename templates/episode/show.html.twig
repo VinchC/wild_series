@@ -35,6 +35,10 @@
 		</tbody>
 	</table>
 
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<p>Laisser un commentaire :</p>
+	{% endif %}
+
 	<a href="{{ path('app_episode_index') }}">Index des épisodes</a>
 
 	<a href="{{ path('app_episode_edit', {episodeSlug: episode.slug}) }}">Modifier</a>
