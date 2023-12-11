@@ -28,8 +28,10 @@
 					<td>{{ program.synopsis }}</td>
 					<td>
 						<a href="{{ path('app_program_show', { programSlug: program.slug }) }}">Voir</a>
-						<a href="{{ path('app_program_edit', { programSlug: program.slug }) }}">Modifier</a>
-						{{ include('program/_delete_form.html.twig') }}
+						{% if is_granted("ROLE_CONTRIBUTOR") %}
+							<a href="{{ path('app_program_edit', { programSlug: program.slug }) }}">Modifier</a>
+							{{ include('program/_delete_form.html.twig') }}
+						{% endif %}
 					</td>
 				</tr>
 
