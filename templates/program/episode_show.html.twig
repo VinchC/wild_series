@@ -31,8 +31,7 @@
 			</p>
 		</div>
 	</div>
-
-	{% if app.user %}
+	{% if is_granted("ROLE_CONTRIBUTOR") %}
 		<p>Laisser un commentaire</p>
 
 		{{ include('comment/_form.html.twig') }}
@@ -58,9 +57,23 @@
 					<td>{{ comment.author.firstname }}</td>
 					<td>{{ comment.updatedAt|date('Y-m-d H:i:s') }}</td>
 					<td>
-						<a href="{{ path('app_comment_show', {'id': comment.id}) }}">Voir</a>
-						<a href="{{ path('app_comment_edit', {'id': comment.id}) }}">Modifier</a>
+						{% if is_granted("ROLE_USER") %}
+							<div>
+								<a href="{{ path('app_comment_show', {'id': comment.id}) }}">Voir</a>
+							</div>
+						{% endif %}
+						{% if is_granted("ROLE_CONTRIBUTOR") %}
+							<div>
+								<a href="{{ path('app_comment_edit', {'id': comment.id}) }}">Modifier</a>
+							</div>
+						{% endif %}
+						{% if is_granted("ROLE_CONTRIBUTOR") %}
+							<div>
+								{{ include('comment/_delete_form.html.twig') }}
+							</div>
+						{% endif %}
 					</td>
+
 				</tr>
 			{% else %}
 				<tr>

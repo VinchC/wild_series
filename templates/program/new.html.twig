@@ -6,4 +6,10 @@
 {% block body %}
 	<h1>Créer une série</h1>
 	{{ include('program/_form.html.twig')}}
+
+	<div>
+		<a href="{{ path('app_program_index') }}">
+			Retour à la liste des programmes
+		</a>
+	</div>
 {% endblock %}
