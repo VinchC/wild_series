@@ -10,7 +10,6 @@ use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\Service\ProgramDuration;
 use Symfony\Component\Mime\Email;
-use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 
 #[Route('/program', name: 'app_program_')]
@@ -51,12 +51,14 @@ class ProgramController extends AbstractController
         SluggerInterface $slugger
     ): Response {
         $program = new Program();
+        $user = $this->getUser();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $slug = $slugger->slug($program->getTitle());
             $program->setSlug($slug);
+            $program->setOwner($user);
             $entityManager->persist($program);
             $entityManager->flush();
 
@@ -96,6 +98,9 @@ class ProgramController extends AbstractController
     #[Route('/{programSlug}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Program $program, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser() !== $program->getOwner()) {
+            throw $this->createAccessDeniedException('Seule la/le propriétaire peut modifier sa série !');
+        }
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
