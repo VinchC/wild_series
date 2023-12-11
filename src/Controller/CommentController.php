@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/comment', name: 'app_comment_')]
 class CommentController extends AbstractController
@@ -49,9 +50,13 @@ class CommentController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_CONTRIBUTOR')]
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser() !== $comment->getAuthor()) {
+            throw $this->createAccessDeniedException('Seule la/le propriétaire peut supprimer son commentaire !');
+        }
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
             $entityManager->remove($comment);
             $entityManager->flush();
