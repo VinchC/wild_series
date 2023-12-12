@@ -23,13 +23,4 @@ class LoginController extends AbstractController
             'error' => $error,
         ]);
     }
-
-    #[Route('/my-profile', name: 'app_user_account')]
-    public function myAccount(): Response
-    {
-        $user = $this->getUser();
-        return $this->render('user/account.html.twig', [
-            'user' => $user,
-        ]);
-    }
 }
