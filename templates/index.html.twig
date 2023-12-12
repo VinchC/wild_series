@@ -10,4 +10,14 @@
 			{{ app.user.firstname }}
 		{% endif %}
 	</h1>
+	{% for program in programs|reverse|slice(0, 3) %}
+		<ul>
+			<li>{{ program.id }}</li>
+			<li><img class="align-self-start mr-3" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster"></li>
+			<li>
+				<a href="{{ path('app_program_show', { programSlug: program.slug}) }}">{{ program.title }}</a>
+			</li>
+			<li>{{ program.category.name }}</li>
+		</ul>
+	{% endfor %}
 {% endblock %}

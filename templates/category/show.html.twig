@@ -13,7 +13,7 @@
 			<li>Série id :
 				{{ program.id }}</li>
 			<li>
-				<a href="{{ path('app_program_show', { slug: program.slug}) }}">{{ program.title }}</a>
+				<a href="{{ path('app_program_show', { programSlug: program.slug}) }}">{{ program.title }}</a>
 			</li>
 			<p>{{ program.synopsis }}</p>
 		</div>

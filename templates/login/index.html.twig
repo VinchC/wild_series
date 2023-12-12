@@ -8,6 +8,10 @@
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 	{% endif %}
 
+	<p>Pas encore de compte ? Nous vous invitons
+		<a href="{{ path('app_register') }}">à en créer un ici</a>.
+	</p>
+
 	<form action="{{ path('app_login') }}" method="post">
 		<label for="username">Email</label>
 		<input type="text" id="username" name="_username" value="{{ last_username }}">
@@ -23,4 +27,7 @@
 
 		<button type="submit">Login</button>
 	</form>
+	<p>
+		<a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+	</p>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte
+{% endblock %}
+
+{% block body %}
+	<h1>Bienvenue
+		{{ app.user.firstname }}
+	</h1>
+
+	<p>{{ user.firstname }}</p>
+	<p>{{ user.email }}</p>
+	<p>
+		{% for comment in user.comments %}
+			<ul>
+				<li>{{ comment.content}}
+				</li>
+			</ul>
+		{% endfor %}
+	</p>
+	<p>
+		{% for program in user.programs %}
+			<ul>
+				<li>{{ program.title}}
+				</li>
+			</ul>
+		{% endfor %}
+	</p>
+{% endblock %}
