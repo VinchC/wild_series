@@ -21,16 +21,29 @@ class ProgramRepository extends ServiceEntityRepository
         parent::__construct($registry, Program::class);
     }
 
-    public function findLikeName(string $name) 
+    public function findLikeName(string $name)
     {
         $queryBuilder = $this->createQueryBuilder('p')
+            ->leftJoin('p.actors', 'a')
             ->where('p.title LIKE :name')
+            ->orWhere('a.lastname LIKE :name')
             ->setParameter('name', '%' . $name . '%')
             ->orderBy('p.title', 'ASC')
             ->getQuery();
 
         return $queryBuilder->getResult();
     }
+
+    // public function findLikeName(string $name) 
+    // {
+    //     $queryBuilder = $this->createQueryBuilder('p')
+    //         ->where('p.title LIKE :name')
+    //         ->setParameter('name', '%' . $name . '%')
+    //         ->orderBy('p.title', 'ASC')
+    //         ->getQuery();
+
+    //     return $queryBuilder->getResult();
+    // }
 
     public function findThreeLastPrograms() 
     {
@@ -40,6 +53,16 @@ class ProgramRepository extends ServiceEntityRepository
             ->getQuery();
 
         return $queryBuilder->getResult();
+    }
+
+    public function findRecentPrograms()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT p, s FROM App\Entity\Program p
+            INNER JOIN p.seasons s
+            WHERE s.year>2015');
+
+        return $query->execute();
     }
 
 //    /**
