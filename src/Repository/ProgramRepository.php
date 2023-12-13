@@ -32,11 +32,9 @@ class ProgramRepository extends ServiceEntityRepository
         return $queryBuilder->getResult();
     }
 
-    public function findThreeLastPrograms(int $id) 
+    public function findThreeLastPrograms() 
     {
         $queryBuilder = $this->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->setParameter('id', $id)
             ->orderBy('p.id', 'DESC')
             ->setMaxResults(3)
             ->getQuery();

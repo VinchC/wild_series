@@ -10,7 +10,8 @@
 			{{ app.user.firstname }}
 		{% endif %}
 	</h1>
-	{% for program in programs|reverse|slice(0, 3) %}
+	{% for program in programs %}
+		{# {% for program in programs|reverse|slice(0, 3) %} #}
 		<ul>
 			<li>{{ program.id }}</li>
 			<li><img class="align-self-start mr-3" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster"></li>
