@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+<div class="errors">
+	{{ form_errors(form) }}
+</div>
+<fieldset>
+	{{ form_errors(form.searchRRR)}}
+	{{ form_label(form.searchRRR)}}
+	{{ form_widget(form.searchRRR)}}
+	{{ form_help(form.searchRRR)}}
+</fieldset>
+<button type="submit">{{ button_label|default('Rechercher') }}</button>
+{{ form_end(form) }}

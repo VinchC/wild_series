@@ -6,6 +6,7 @@
 {% block body %}
 	<h1>Liste des séries</h1>
 	<a href="{{ path('app_program_new') }}">Créer une série</a>
+	{{ include('./search/_form.html.twig') }}
 
 	<table class="table">
 		<thead>

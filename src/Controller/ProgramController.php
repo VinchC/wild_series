@@ -8,6 +8,7 @@ use App\Entity\Episode;
 use App\Entity\Program;
 use App\Form\CommentType;
 use App\Form\ProgramType;
+use App\Form\SearchProgramType;
 use App\Service\ProgramDuration;
 use Symfony\Component\Mime\Email;
 use App\Repository\EpisodeRepository;
@@ -26,7 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProgramController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(RequestStack $requestStack, ProgramRepository $programRepository): Response
+    public function index(Request $request, RequestStack $requestStack, ProgramRepository $programRepository): Response
     {
         $session = $requestStack->getSession();
         if (!$session->has('total')) {
@@ -35,10 +36,19 @@ class ProgramController extends AbstractController
 
         $total = $session->get('total');
 
-        $programs = $programRepository->findAll();
+        $form = $this->createForm(SearchProgramType::class); // Création du formulaire de recherche défini dans le ...Type
+        $form->handleRequest($request); // permet de traiter la requête de l'utiliateur à la soumission de celle-ci
+
+        if ($form->isSubmitted() && $form->isValid()) { // vérification de la validation du formulaire à sa soumission
+            $search = $form->getData()['searchRRR']; // Récupération du contenu de la requête dans le champs du formulaire
+            $programs = $programRepository->findBy(['title' => $search]); // Récupération des séries dont le titre correspond au contenu de la requête
+        } else {
+            $programs = $programRepository->findAll(); // si pas de correspondance, affichage de toutes les séries
+        }
         return $this->render('program/index.html.twig', [
             'programs' => $programs,
             'total' => $total,
+            'form' => $form,
         ]);
     }
 
