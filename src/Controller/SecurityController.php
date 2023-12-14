@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_CONTRIBUTOR']);
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,

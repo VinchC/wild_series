@@ -7,6 +7,14 @@
 	<h1>Liste des épisodes</h1>
 	<a href="{{ path('app_episode_new') }}">Créer un épisode</a>
 
+	{% set count = 0 %}
+	{% for episode in episodes %}
+		{% set count = count + 1 %}
+	{% endfor %}
+
+	<div>Nombre d'épisodes :
+		{{ count }}</div>
+
 	<table class="table">
 		<thead>
 			<tr>
