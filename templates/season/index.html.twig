@@ -7,6 +7,11 @@
 	<h1>Liste des saisons</h1>
 	<a href="{{ path('app_season_new') }}">Créer une saison</a>
 
+	{% set count = 0 %}
+	{% for season in seasons %}
+		{% set count = count + 1 %}
+	{% endfor %}
+
 	<table class="table">
 		<thead>
 			<tr>
