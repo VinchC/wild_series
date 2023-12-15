@@ -18,12 +18,13 @@
 
 	{# <img src="{{ asset('build/path_to_image.png') }}" alt=""/> #}
 
-	<body>
+	<body {{ stimulus_controller('theme') }} {{ stimulus_target('theme', 'body') }}>
 		<header>
 			{% block navbar %}
 				{{ include('./navbar/_navbar.html.twig') }}
 			{% endblock %}
 		</header>
+
 		<main>
 			{# {{ app.session.get('total') }} #}
 			{% for category, messages in app.flashes %}
@@ -36,7 +37,7 @@
 			{% block body %}
 				{% block content %}{% endblock %}
 			{% endblock %}
-			<main></body>
-		</html>
+		</main>	
+		<footer {{ stimulus_controller('theme') }} {{ stimulus_target('theme', 'footer') }}>BLABLA</footer>
 	</body>
 </html>
