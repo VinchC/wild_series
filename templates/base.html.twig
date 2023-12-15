@@ -24,7 +24,6 @@
 				{{ include('./navbar/_navbar.html.twig') }}
 			{% endblock %}
 		</header>
-		{# <body data-controller="hello">...</body> #}
 
 		<main>
 			{# {{ app.session.get('total') }} #}
@@ -39,6 +38,6 @@
 				{% block content %}{% endblock %}
 			{% endblock %}
 		</main>	
-		<footer {{ stimulus_controller('hello') }}>...</footer>
+		<footer {{ stimulus_controller('theme') }} {{ stimulus_target('theme', 'footer') }}>BLABLA</footer>
 	</body>
 </html>
