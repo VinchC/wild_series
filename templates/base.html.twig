@@ -24,20 +24,25 @@
 				{{ include('./navbar/_navbar.html.twig') }}
 			{% endblock %}
 		</header>
-
-		<main>
-			{# {{ app.session.get('total') }} #}
-			{% for category, messages in app.flashes %}
-				{% for message in messages %}
-					<div class="alert alert-{{ category }}">
-						{{ message }}
-					</div>
+		<div id="swup">
+			<main {{ stimulus_controller('symfony/ux-swup/swup') }} >
+				{# {{ app.session.get('total') }} #}
+				{% for category, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="alert alert-{{ category }}">
+							{{ message }}
+						</div>
+					{% endfor %}
 				{% endfor %}
-			{% endfor %}
-			{% block body %}
-				{% block content %}{% endblock %}
-			{% endblock %}
-		</main>	
-		<footer {{ stimulus_controller('theme') }} {{ stimulus_target('theme', 'footer') }}>BLABLA</footer>
+
+				{% block body %}
+					{% block content %}{% endblock %}
+				{% endblock %}
+
+			</main>				
+		</div>
+		<footer>
+			<p>BLABLA</p>
+		</footer>
 	</body>
 </html>
