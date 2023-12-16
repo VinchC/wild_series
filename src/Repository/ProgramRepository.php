@@ -34,16 +34,6 @@ class ProgramRepository extends ServiceEntityRepository
         return $queryBuilder->getResult();
     }
 
-    // public function findLikeName(string $name) 
-    // {
-    //     $queryBuilder = $this->createQueryBuilder('p')
-    //         ->where('p.title LIKE :name')
-    //         ->setParameter('name', '%' . $name . '%')
-    //         ->orderBy('p.title', 'ASC')
-    //         ->getQuery();
-
-    //     return $queryBuilder->getResult();
-    // }
 
     public function findThreeLastPrograms() 
     {
