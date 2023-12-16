@@ -250,6 +250,9 @@
     "symfony/ux-swup": {
         "version": "v2.13.2"
     },
+    "symfony/ux-typed": {
+        "version": "v2.13.2"
+    },
     "symfony/validator": {
         "version": "6.3",
         "recipe": {

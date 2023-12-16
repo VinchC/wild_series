@@ -11,6 +11,12 @@
                 "enabled": true,
                 "fetch": "eager"
             }
+        },
+        "@symfony/ux-typed": {
+            "typed": {
+                "enabled": true,
+                "fetch": "eager"
+            }
         }
     },
     "entrypoints": []
