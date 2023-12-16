@@ -247,6 +247,9 @@
     "symfony/ux-chartjs": {
         "version": "v2.13.2"
     },
+    "symfony/ux-dropzone": {
+        "version": "v2.13.2"
+    },
     "symfony/ux-swup": {
         "version": "v2.13.2"
     },

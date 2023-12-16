@@ -39,6 +39,7 @@
         "symfony/translation": "6.3.*",
         "symfony/twig-bundle": "6.3.*",
         "symfony/ux-chartjs": "^2.13",
+        "symfony/ux-dropzone": "^2.13",
         "symfony/ux-swup": "^2.13",
         "symfony/ux-typed": "^2.13",
         "symfony/validator": "6.3.*",
