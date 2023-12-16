@@ -108,9 +108,9 @@ class ProgramController extends AbstractController
     #[Route('/{programSlug}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Program $program, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $program->getOwner()) {
-            throw $this->createAccessDeniedException('Seule la/le propriétaire peut modifier sa série !');
-        }
+        // if ($this->getUser() !== $program->getOwner()) {
+        //     throw $this->createAccessDeniedException('Seule la/le propriétaire peut modifier sa série !');
+        // }
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 

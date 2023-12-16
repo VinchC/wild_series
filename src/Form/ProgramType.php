@@ -6,6 +6,7 @@ use App\Entity\Actor;
 use App\Entity\Program;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,23 +23,28 @@ class ProgramType extends AbstractType
                     'placeholder' => 'Renseignez le titre',
                 ],
                 'label' => 'Titre'
-                ])
+            ])
             ->add('synopsis', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Indiquez le synopsis',
                 ],
                 'label' => 'Synopsis'
-                ])
-            ->add('posterFile', VichFileType::class, [
+            ])
+            ->add('posterFile', DropzoneType::class, [
+            // ->add('posterFile', VichFileType::class, [
                 'required'      => false,
-                'allow_delete'  => false,
-                'download_uri' => false,
-                'label' => 'Image'
-                ])
+                // 'allow_delete'  => false,
+                // 'download_uri' => false,
+                'label' => 'Image',
+                'attr' => [
+                'placeholder' => 'Copiez/glissez une image ou cliquez pour parcourir'
+                ]
+            ])
             ->add('category', EntityType::class, [
                 'label' => 'Catégorie',
                 'class' => Category::class, 
-                'choice_label' => 'name'])
+                'choice_label' => 'name'
+            ])
             ->add('actors', EntityType::class, [
                 'label' => 'Acteurs',
                 'class' => Actor::class, 
@@ -46,7 +52,7 @@ class ProgramType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
-                ])
+            ])
         ;
     }
 
