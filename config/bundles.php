@@ -21,4 +21,6 @@ return [
     Symfony\UX\Chartjs\ChartjsBundle::class => ['all' => true],
     Symfony\UX\Typed\TypedBundle::class => ['all' => true],
     Symfony\UX\Dropzone\DropzoneBundle::class => ['all' => true],
+    Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
+    Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
 ];
