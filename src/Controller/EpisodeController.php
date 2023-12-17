@@ -64,7 +64,7 @@ class EpisodeController extends AbstractController
         ]);
     }
 
-    #[Route('/{episodeSlug}', name: 'show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Episode $episode): Response
     {
         return $this->render('episode/show.html.twig', [
@@ -72,7 +72,7 @@ class EpisodeController extends AbstractController
         ]);
     }
 
-    #[Route('/{episodeSlug}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Episode $episode, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(EpisodeType::class, $episode);

@@ -84,7 +84,7 @@
 	</table>
 
 	<div>
-		<a href="{{ path('app_episode_edit', { episodeSlug: episode.slug }) }}">Modifier</a>
+		<a href="{{ path('app_episode_edit', { 'id': episode.id }) }}">Modifier</a>
 	</div>
 	<div>
 		<a href="{{ path('app_program_season_show', { programSlug: program.slug, season: season.id }) }}">

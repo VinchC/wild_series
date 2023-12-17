@@ -37,8 +37,8 @@
 					<td>{{ episode.synopsis }}</td>
 					<td>{{ episode.duration }}</td>
 					<td>
-						<a href="{{ path('app_episode_show', {episodeSlug: episode.slug}) }}">Voir</a>
-						<a href="{{ path('app_episode_edit', {episodeSlug: episode.slug}) }}">Modifier</a>
+						<a href="{{ path('app_episode_show', {'id': episode.id}) }}">Voir</a>
+						<a href="{{ path('app_episode_edit', {'id': episode.id}) }}">Modifier</a>
 						{{ include('episode/_delete_form.html.twig') }}
 					</td>
 				</tr>

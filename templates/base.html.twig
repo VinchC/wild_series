@@ -37,10 +37,14 @@
 			{% endfor %}
 
 			{% block body %}
-				{% block content %}{% endblock %}
+				{% block content %}
+					<aside>
+						{{ component('LastEpisode') }}
+					</aside>
+				{% endblock %}
 			{% endblock %}
-
 		</main>
 		{# </div> #}
+		<footer></footer>
 	</body>
-</html></footer></body></html>
+</html>

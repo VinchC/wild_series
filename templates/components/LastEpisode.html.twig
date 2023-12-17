@@ -1,0 +1,9 @@
+<div{{attributes}}>
+	<ul>
+		{% for episode in this.lastthreeepisodes %}
+			<li>
+				<a href="{{ path('app_episode_show', {'id': episode.id}) }}">{{ episode.id }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
