@@ -1,9 +1,13 @@
 <div{{attributes}}>
-	<ul>
-		{% for program in this.lastthreeprograms %}
+	{% for program in this.lastprograms %}
+		<ul id="programCard">
+			<li>{{ program.posterFile }}
+			</li>
 			<li>
 				<a href="{{ path('app_program_show', {programSlug: program.slug}) }}">{{ program.title }}</a>
 			</li>
-		{% endfor %}
-	</ul>
+			<li>{{ program.synopsis }}
+			</li>
+		</ul>
+	{% endfor %}
 </div>
