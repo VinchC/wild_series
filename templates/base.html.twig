@@ -35,16 +35,15 @@
 					</div>
 				{% endfor %}
 			{% endfor %}
-
-			{% block body %}
-				{% block content %}
-					<aside>
-						{{ component('LastEpisode') }}
-					</aside>
+			<aside>
+				{% block aside %}
+					<p>Trois derniers épisodes</p>
+					{{ component('LastEpisode') }}
 				{% endblock %}
+			</aside>
+			{% block body %}
+				{% block content %}{% endblock %}
 			{% endblock %}
 		</main>
-		{# </div> #}
-		<footer></footer>
 	</body>
-</html>
+</html></div><footer></footer></body></html>
