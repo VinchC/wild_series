@@ -1,8 +1,7 @@
 <div{{attributes}}>
 	{% for program in this.lastprograms %}
 		<ul id="programCard">
-			<li>{{ program.posterFile }}
-			</li>
+			<img class="align-self-start mr-3" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster">
 			<li>
 				<a href="{{ path('app_program_show', {programSlug: program.slug}) }}">{{ program.title }}</a>
 			</li>

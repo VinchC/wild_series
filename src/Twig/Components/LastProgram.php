@@ -16,6 +16,6 @@ final class LastProgram
 
     public function getLastPrograms(): array
     {
-        return $this->programRepository->findBy([], ['id' => 'DESC'], $this->numPrograms);
+        return $this->programRepository->findBy([], ['id' => 'ASC'], $this->numPrograms);
     }
 }
