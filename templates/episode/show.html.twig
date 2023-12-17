@@ -37,7 +37,7 @@
 
 	<a href="{{ path('app_episode_index') }}">Index des épisodes</a>
 
-	<a href="{{ path('app_episode_edit', {episodeSlug: episode.slug}) }}">Modifier</a>
+	<a href="{{ path('app_episode_edit', {'id': episode.id}) }}">Modifier</a>
 
 	{{ include('episode/_delete_form.html.twig') }}
 {% endblock %}
