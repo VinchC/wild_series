@@ -22,8 +22,9 @@ aside {
     margin: var(--spacing);
     float: left;
     font-style: bold;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     border: 2px solid black;
+    border-radius: 10px;
 }
 
 main {

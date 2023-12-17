@@ -1,0 +1,9 @@
+<div{{attributes}}>
+	<ul>
+		{% for program in this.lastthreeprograms %}
+			<li>
+				<a href="{{ path('app_program_show', {programSlug: program.slug}) }}">{{ program.title }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
