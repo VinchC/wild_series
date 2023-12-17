@@ -154,7 +154,7 @@ class Actor
     }
 
     public function getName(): string
-{
-  return $this->getFirstName() . ' ' . $this->getLastName();
-}
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }

@@ -4,7 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Actor index</h1>
+	{{ component('actor') }}
+	<h1>Index des acteurs</h1>
 	{% set count = 0 %}
 	{% for actor in actors %}
 		{% set count = count + 1 %}

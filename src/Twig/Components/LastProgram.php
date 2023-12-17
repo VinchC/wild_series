@@ -8,13 +8,14 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent()]
 final class LastProgram
 {
+    public int $numPrograms = 6;
     public function __construct(
         private ProgramRepository $programRepository
     ) {
     }
 
-    public function getLastThreePrograms(): array
+    public function getLastPrograms(): array
     {
-        return $this->programRepository->findBy([], ['id' => 'DESC'], 3);
+        return $this->programRepository->findBy([], ['id' => 'ASC'], $this->numPrograms);
     }
 }

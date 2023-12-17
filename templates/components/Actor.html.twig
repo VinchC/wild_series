@@ -1,0 +1,13 @@
+<div{{attributes}}>
+	<label for="input_search">Rechercher un acteur</label>
+	<input type="text" id="input_search" data-model="search">
+
+	<section id="actorCard">
+		{% for actor in this.searchActors %}
+			<ul>
+				<li>{{ actor.name }}</li>
+				<li>{{ actor.birthDate ? actor.birthDate|date('Y-m-d') : '' }}</li>
+			</ul>
+		{% endfor %}
+	</section>
+</div>

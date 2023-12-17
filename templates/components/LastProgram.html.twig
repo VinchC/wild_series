@@ -1,9 +1,12 @@
 <div{{attributes}}>
-	<ul>
-		{% for program in this.lastthreeprograms %}
+	{% for program in this.lastprograms %}
+		<ul id="programCard">
+			<img class="align-self-start mr-3" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster">
 			<li>
 				<a href="{{ path('app_program_show', {programSlug: program.slug}) }}">{{ program.title }}</a>
 			</li>
-		{% endfor %}
-	</ul>
+			<li>{{ program.synopsis }}
+			</li>
+		</ul>
+	{% endfor %}
 </div>
