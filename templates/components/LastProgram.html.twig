@@ -2,7 +2,7 @@
 	<div id="container" class="row">
 		{% for program in this.lastprograms %}
 			<div class="component col-sm-12 col-md-6 col-xl-3">
-				<img src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster">
+				<img src="{{ vich_uploader_asset(program) }}" id="animPicture" alt="{{ program.title }} poster">
 				<h2>{{ program.title }}</h2>
 				<p class="nodisplayp">{{ program.synopsis }}</p>
 				<button>

@@ -80,6 +80,22 @@ img {
     max-height: auto;
 }
 
+#animPicture {
+    animation-name: pictureAnimation;
+    animation-duration: 5s;
+    animation-iteration-count: infinite; 
+  }
+  
+@keyframes pictureAnimation {
+    0%   {transform: translate(0px, 0px);}
+    50%  {transform: translate(0px, 0px) rotateY(180deg) scale(1);}
+    100% {transform: translate(0px, 0px) rotate(0deg);}    
+    0%   {opacity: 1;}
+    25%  {opacity: 0.75;}
+    50%  {opacity: 0.5;}
+    100% {opacity: 0.25;}
+}
+
 .component h2 {
     font-size: 1.25rem;
     text-align: center;
