@@ -1,12 +1,14 @@
 <div{{attributes}}>
-	{% for program in this.lastprograms %}
-		<ul id="programCard">
-			<img class="align-self-start mr-3" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster">
-			<li>
-				<a href="{{ path('app_program_show', {programSlug: program.slug}) }}">{{ program.title }}</a>
-			</li>
-			<li>{{ program.synopsis }}
-			</li>
-		</ul>
-	{% endfor %}
+	<div id="container" class="row">
+		{% for program in this.lastprograms %}
+			<div class="component col-sm-12 col-md-6 col-xl-3">
+				<img src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster">
+				<h2>{{ program.title }}</h2>
+				<p class="nodisplayp">{{ program.synopsis }}</p>
+				<button>
+					<a href="{{ path('app_program_show', {programSlug: program.slug}) }}">Voir plus</a>
+				</button>
+			</div>
+		{% endfor %}
+	</div>
 </div>

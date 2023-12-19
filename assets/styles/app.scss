@@ -53,3 +53,66 @@ img {
 #chart {
     height: 20rem;
 }
+
+#container {
+    display: flex;
+    justify-content: space-evenly;    
+    width: 100%;
+}
+
+.component {
+    width: 20rem;
+    height: 25rem;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: 3fr 1fr 3fr 1fr;
+    box-shadow: 5px 5px 5px 5px black;
+    padding: var(--spacing);
+    margin: var(--spacing);
+}
+
+.component img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 13rem;
+    max-height: auto;
+}
+
+.component h2 {
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.component button {
+    background-color: var(--primary-color);
+    border-radius: 5%;
+    width: 60%;
+    margin: auto;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    margin-top: 0;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .nodisplayp {
+        display: none;
+    }
+
+    .component {
+        /* width: 15rem; */
+        height: 18rem;
+        display: grid;
+        grid-template-rows: 3fr 1fr 0fr 1fr;
+        box-shadow: 5px 5px 5px 5px black;
+        padding: calc(var(--spacing)/2);
+        margin: calc(var(--spacing)/2);
+    }
+}
