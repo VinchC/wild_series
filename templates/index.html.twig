@@ -5,11 +5,12 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ welcome }}
+	<p>{{ welcome }}
 		{% if app.user %}
 			{{ app.user.firstname }}
 		{% endif %}
-	</h1>
+	</p>
+	{{ component('ProgramSearch') }}
 
 	<h2>To do list</h2>
 
