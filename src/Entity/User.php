@@ -217,8 +217,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function addToWatchlist(Program $program): self
     {
         if (!$this->watchlist->contains($program)) {
-            $this->watchlist->add($program);
-            $program->addViewer($this);
+            $this->watchlist[] = $program;
         }
 
         return $this;
@@ -227,9 +226,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeFromWatchlist(Program $program): self
     {
         $this->watchlist->removeElement($program);
-        if ($this->watchlist->removeElement($program)) {
-            $program->removeViewer($this);
-        }
 
         return $this;
     }

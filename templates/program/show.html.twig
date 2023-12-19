@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	{% if app.user %}
-		<a href="{{ path('app_program_watchlist', {id: program.id})}}">
-			<i class="bi {{ app.user.isInWatchlist(program) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
-		</a>
-	{% endif %}
+	{{ component('Watchlist', { program: program }) }}
 
 	<div class="media">
 		<img class="align-self-start mr-3" src="{{ vich_uploader_asset(program) }}" alt="{{ program.title }} poster">
