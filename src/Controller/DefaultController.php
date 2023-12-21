@@ -19,4 +19,10 @@ class DefaultController extends AbstractController
             'welcome' => 'Hello'
         ]);
     }
+
+    #[Route('/todolist', name: 'app_to_do_list')]
+    public function displayToDoList(): Response
+    {
+        return $this->render('todolist.html.twig');
+    }
 }
