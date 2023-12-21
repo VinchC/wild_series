@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta name="viewport" description="Un site avec des séries, des saisons et des acteurs" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8">
 		<title>
 			{% block title %}Wild Series
 			{% endblock %}
@@ -25,7 +25,7 @@
 			{% endblock %}
 		</header>
 		{# <div id="swup">
-				<main {{ stimulus_controller('symfony/ux-swup/swup') }}> #}
+						<main {{ stimulus_controller('symfony/ux-swup/swup') }}> #}
 		<main>
 			{# {{ app.session.get('total') }} #}
 			{% for category, messages in app.flashes %}
@@ -36,11 +36,11 @@
 				{% endfor %}
 			{% endfor %}
 			{# <aside>
-							{% block aside %}
-								<p>Trois derniers épisodes</p>
-								{{ component('LastEpisode') }}
-							{% endblock %}
-						</aside> #}
+										{% block aside %}
+											<p>Trois derniers épisodes</p>
+											{{ component('LastEpisode') }}
+										{% endblock %}
+									</aside> #}
 			{% block body %}
 				{% block content %}{% endblock %}
 			{% endblock %}
