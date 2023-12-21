@@ -12,12 +12,10 @@
 	</p>
 	{{ component('ProgramSearch') }}
 
-	<h2>To do list</h2>
-
 	<ul>
 		<div class="p-3" style="font-size: 1.3em;">
-			<span {{ stimulus_controller('symfony/ux-typed', { strings: [ 'Fetcher les données GitHub via le site directement et non les indiquer en dur', 'Sécuriser toutes les routes', 'Mettre des images de séries via les Fixtures', 'Page 404 stylée', 'Card Program avec CSS', 'Logout auto après une durée déterminée', 'Verify Email qui fonctionne vraiment', 'Search bar dans Navbar qui parcourt tout le contenu du site'], smartBackspace: true, startDelay: 100, backSpeed: 20, backDelay: 100, loop: true,showCursor: true, cursorChar: '✨' } ) }}></span>
+			<span {{ stimulus_controller('symfony/ux-typed', { strings: [ "The government's responsible...", "Freedom is a road seldom travelled by the multitude", "The counterattack on world supremacy", "Justice evolves only after injustice is defeated", "There is no future without a past", "What side you on", "The game behind the game", "The millenium for many is the wall"], smartBackspace: true, startDelay: 100, backSpeed: 20, backDelay: 100, loop: true,showCursor: true, cursorChar: '✨' } ) }}></span>
 		</div>
 	</ul>
-	{{ component('LastProgram', {numPrograms: 6}) }}
+	{{ component('LastProgram', {numPrograms: 4}) }}
 {% endblock %}
