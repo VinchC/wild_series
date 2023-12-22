@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
+
+{% block head %}
+	{% set page_title = "Wild Series - Liste des séries" %}
 	{{ parent() }}
-	- Liste des séries
+	<title>
+		{% block title %}
+			{{ page_title }}
+		{% endblock %}
+	</title>
+
+	{% block meta %}
+		<meta name="description" content="La page d'affichage des séries">
+		<meta name="keywords" content="Séries">
+	{% endblock %}
 {% endblock %}
+
 
 {% block body %}
 	<h1>Liste des séries</h1>

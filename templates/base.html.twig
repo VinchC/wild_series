@@ -1,18 +1,46 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" description="Un site avec des séries, des saisons et des acteurs" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8">
-		<title>
-			{% block title %}Wild Series
-			{% endblock %}
-		</title>
-		<link rel="icon" href="{{ asset('./build/images/favicon.jpg') }}" alt="favicon"/>
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-		{% endblock %}
+		{% set page_title = 'Wild Series' %}
+		{% block head %}
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+			<meta name="author" content="VinchC">
+			<meta http-equiv="refresh" content="120">
 
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
+			<title>
+				{% block title %}
+					{{ page_title }}
+				{% endblock %}
+			</title>
+
+			{% block meta %}
+				<meta name="description" content="Un site avec des séries, des saisons et des acteurs, qui sert de fil rouge pour ma progression de l'apprentissage du framework Symfony">
+				<meta name="keywords" content="Séries, Acteurs, Symfony">
+			{% endblock %}
+
+			{% block robots %}
+				<meta name="robots" content="index, follow">
+			{% endblock %}
+
+			{% block metaproperty %}
+				<meta property="og:title" content="{{ page_title }}">
+				<meta property="og:description">
+				<meta property="og:type">
+				<meta property="og:image">
+				<meta property="og:url">
+				<meta property="og:site_name">
+			{% endblock %}
+
+			<link rel="icon" href="{{ asset('./build/images/favicon.jpg') }}" alt="favicon"/>
+
+			{% block stylesheets %}
+				{{ encore_entry_link_tags('app') }}
+			{% endblock %}
+
+			{% block javascripts %}
+				{{ encore_entry_script_tags('app') }}
+			{% endblock %}
 		{% endblock %}
 	</head>
 
@@ -24,8 +52,6 @@
 				{{ include('./navbar/_navbar.html.twig') }}
 			{% endblock %}
 		</header>
-		{# <div id="swup">
-						<main {{ stimulus_controller('symfony/ux-swup/swup') }}> #}
 		<main>
 			{# {{ app.session.get('total') }} #}
 			{% for category, messages in app.flashes %}
@@ -35,17 +61,12 @@
 					</div>
 				{% endfor %}
 			{% endfor %}
-			{# <aside>
-										{% block aside %}
-											<p>Trois derniers épisodes</p>
-											{{ component('LastEpisode') }}
-										{% endblock %}
-									</aside> #}
 			{% block body %}
 				{% block content %}{% endblock %}
 			{% endblock %}
 		</main>
-		{# </div> #}
-		<footer></footer>
+		{% block footer %}
+			<footer>Copyrights VinchC 2024</footer>
+		{% endblock %}
 	</body>
-</html></body></html>
+</html>
