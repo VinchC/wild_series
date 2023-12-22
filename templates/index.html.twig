@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wild Series
-	{{ welcome }}
+
+{% block head %}
+	{% set page_title = "Wild Series - Bienvenue" %}
+	{{ parent() }}
+	<title>
+		{% block title %}
+			{{ page_title }}
+		{% endblock %}
+	</title>
+
 {% endblock %}
 
 {% block body %}

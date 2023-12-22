@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Série
+{% block title %}
+	{{ parent() }}
+	- Série
 	{{ program.title }}
 {% endblock %}
 

@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des séries
+
+{% block head %}
+	{% set page_title = "Wild Series - Liste des séries" %}
+	{% set page_description = "La page d'affichage des séries" %}
+	{% set robots = "noindex, nofollow" %}
+	{% set page_url = "https://localhost:8000/program" %}
+	{{ parent() }}
 {% endblock %}
+
 
 {% block body %}
 	<h1>Liste des séries</h1>
