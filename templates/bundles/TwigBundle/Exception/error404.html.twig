@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+	{% set page_title = "404 Not Found" %}
+	{% set page_description = "Page introuvable" %}
+	<title>
+		{% block title %}
+			{{ page_title }}
+		{% endblock %}
+	</title>
+{% endblock %}
+
+{% block body %}
+	{% block content %}
+		<h1>NON!</h1>
+
+		<p>
+			La page demandée n'existe pas et on allait pas se prendre la tête sur le design - il vous appartient de naviguer correctement si vous choisissez de le faire via l'URL!
+		</p>
+		<p>
+			On a mis tout un tas de liens via des boutons ou autres pour éviter ce genre d'incidents...
+		</p>
+		<p>
+			Vous pouvez retourner sur la page d'accueil
+			<a href="{{ path('app_index') }}">ici</a>.
+		</p>
+	{% endblock %}
+{% endblock %}
