@@ -3,8 +3,9 @@
 	<head>
 		{% set page_title = "Wild Series" %}
 		{% set page_description = "Un site avec des séries, des saisons et des acteurs, qui sert de fil rouge pour ma progression de l'apprentissage du framework Symfony" %}
-		{% set keywords = "Séries, Acteurs, Symfony" %}
 		{% set robots = "index, follow" %}
+		{% set page_url = "https://localhost:8000/" %}
+		{% set site_name = "Wild Series" %}
 
 		{% block head %}
 			<meta charset="UTF-8">
@@ -12,7 +13,6 @@
 			<meta name="author" content="VinchC">
 			<meta http-equiv="refresh" content="120">
 			<meta name="description" content="{{ page_description }}">
-			<meta name="keywords" content="{{ keywords }}">
 			<meta name="robots" content="{{ robots }}">
 
 			<title>
@@ -24,10 +24,11 @@
 			{% block metaproperty %}
 				<meta property="og:title" content="{{ page_title }}">
 				<meta property="og:description" content=" {{ page_description }} ">
-				<meta property="og:type">
+				<meta property="og:locale" content="fr_FR"/>
+				<meta property="og:type" content="video.tv_show">
 				<meta property="og:image">
-				<meta property="og:url">
-				<meta property="og:site_name">
+				<meta property="og:url" content=" {{ page_url }} ">
+				<meta property="og:site_name" content=" {{ site_name }} ">
 			{% endblock %}
 
 			<link rel="icon" href="{{ asset('./build/images/favicon.jpg') }}" alt="favicon"/>
@@ -67,4 +68,4 @@
 			<footer>Copyrights VinchC 2024</footer>
 		{% endblock %}
 	</body>
-</html></head></html></head></html></head></html></head></html>
+</html>
