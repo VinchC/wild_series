@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		{% set page_title = 'Wild Series' %}
+		{% set page_title = "Wild Series" %}
+		{% set page_description = "Un site avec des séries, des saisons et des acteurs, qui sert de fil rouge pour ma progression de l'apprentissage du framework Symfony" %}
+		{% set keywords = "Séries, Acteurs, Symfony" %}
+		{% set robots = "index, follow" %}
+
 		{% block head %}
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 			<meta name="author" content="VinchC">
 			<meta http-equiv="refresh" content="120">
+			<meta name="description" content="{{ page_description }}">
+			<meta name="keywords" content="{{ keywords }}">
+			<meta name="robots" content="{{ robots }}">
 
 			<title>
 				{% block title %}
@@ -14,18 +21,9 @@
 				{% endblock %}
 			</title>
 
-			{% block meta %}
-				<meta name="description" content="Un site avec des séries, des saisons et des acteurs, qui sert de fil rouge pour ma progression de l'apprentissage du framework Symfony">
-				<meta name="keywords" content="Séries, Acteurs, Symfony">
-			{% endblock %}
-
-			{% block robots %}
-				<meta name="robots" content="index, follow">
-			{% endblock %}
-
 			{% block metaproperty %}
 				<meta property="og:title" content="{{ page_title }}">
-				<meta property="og:description">
+				<meta property="og:description" content=" {{ page_description }} ">
 				<meta property="og:type">
 				<meta property="og:image">
 				<meta property="og:url">
@@ -69,4 +67,4 @@
 			<footer>Copyrights VinchC 2024</footer>
 		{% endblock %}
 	</body>
-</html>
+</html></head></html></head></html></head></html></head></html>
