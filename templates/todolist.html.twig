@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+	{{ parent() }}
+	- To do list
+{% endblock %}
+
 {% block content %}
 	{{ parent() }}
 	<h2>To do list</h2>

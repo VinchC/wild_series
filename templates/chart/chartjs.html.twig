@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+	{{ parent() }}
+	- Tableau
+{% endblock %}
+
 {% block body %}
 	<div id="chart">
 		{{ render_chart(chart) }}
