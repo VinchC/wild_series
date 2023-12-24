@@ -12,8 +12,8 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(ProgramRepository $programRepository): Response
     {
-        $programs = $programRepository->findThreeLastPrograms();
-        // $programs = $programRepository->findRecentPrograms();
+        // $programs = $programRepository->findThreeLastPrograms();
+        $programs = $programRepository->findRecentPrograms();
         return $this->render('index.html.twig', [
             'programs' => $programs,
             'welcome' => 'Hello'

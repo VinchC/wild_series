@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block body %}
+	{{ include('partials/_carousel.html.twig')}}
 	<p>{{ welcome }}
 		{% if app.user %}
 			{{ app.user.firstname }}
