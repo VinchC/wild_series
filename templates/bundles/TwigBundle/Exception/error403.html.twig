@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+	{% set page_title = "403 accès interdit" %}
+	{% set page_description = "Page interdite" %}
+	{{ parent() }}
+	<title>
+		{% block title %}
+			{{ page_title }}
+		{% endblock %}
+	</title>
+{% endblock %}
+
+{% block body %}
+	{% block content %}
+		<h1>ACCES INTERDIT!</h1>
+
+		<p>
+			Vous n'avez rien à faire ici !
+		</p>
+		<p>
+			Vous pouvez retourner sur la page d'accueil
+			<a href="{{ path('app_index') }}">ici</a>.
+		</p>
+	{% endblock %}
+{% endblock %}
