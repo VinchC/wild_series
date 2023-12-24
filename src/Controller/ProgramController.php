@@ -40,7 +40,7 @@ class ProgramController extends AbstractController
         $form->handleRequest($request); // permet de traiter la requête de l'utiliateur à la soumission de celle-ci
 
         if ($form->isSubmitted() && $form->isValid()) { // vérification de la validation du formulaire à sa soumission
-            $name = $form->getData()['searchRRR']; // Récupération du contenu de la requête dans le champs du formulaire
+            $name = $form->getData()['search']; // Récupération du contenu de la requête dans le champs du formulaire
             $programs = $programRepository->findLikeName($name); 
             // $programs = $programRepository->findBy(['title' => $search]); // Récupération des séries dont le titre correspond au contenu de la requête
         } else {
