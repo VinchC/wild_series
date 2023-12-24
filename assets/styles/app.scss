@@ -3,6 +3,7 @@
     --secondary-color: rgb(255, 253, 253);
     --tertiary-color: orange;
     --spacing: 1rem;
+    --length: 5rem;
 }
 
 @import "~bootstrap/scss/bootstrap";
@@ -13,10 +14,16 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 2
+}
+
+.navbar {
+    padding: 0;
 }
 
 body {
     background-color: var(--secondary-color);
+    z-index: 1;
 }
 
 aside {
@@ -40,13 +47,10 @@ main {
     height: 4rem;
 }
 
-.navbar {
-    padding: 0;
-}
 
 img {
-    max-width: 15rem;
-    max-height: 15rem;
+    max-width: calc(var(--length)*3);
+    max-height: calc(var(--length)*3);
 }
 
 #commentEpisode input {
@@ -54,8 +58,10 @@ img {
 }
 
 #chart {
-    height: 20rem;
+    height: calc(var(--length)*4);
 }
+
+// Homepage
 
 #container {
     display: flex;
@@ -64,8 +70,8 @@ img {
 }
 
 .component {
-    width: 20rem;
-    height: 25rem;
+    width: calc(var(--length)*4);
+    height: calc(var(--length)*5);
     display: grid;
     justify-items: center;
     align-items: center;
@@ -79,7 +85,7 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 13rem;
+    max-width: calc(var(--length)*3);
     max-height: auto;
 }
 
@@ -111,6 +117,54 @@ img {
     margin: auto;
 }
 
+// carousel
+
+// .carousel {
+//     position:absolute;
+//     top:0;    
+// }
+
+.carousel-inner {
+    width: 100%;
+    height: calc(var(--length)*4);
+    display: flex;
+    align-items: center;   
+}
+
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    // margin-right: -100%;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item img {
+    max-width: calc(var(--length)*6);
+    max-height: calc(var(--length)*6);
+}
+
+.carousel-item.active {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+    filter: invert(1) grayscale(100);
+}
+
+.carousel-indicators {
+    margin-bottom: -1rem;
+}
+
+.carousel-indicators [data-bs-target] {
+    filter: invert(1) grayscale(100);
+}
+
+
 footer {
     display: flex;
     align-items: center;
@@ -119,6 +173,8 @@ footer {
     margin-top: 0;
 }
 
+
+// page 404
 #hiddenBack, #hiddenBack a {
     color: var(--secondary-color);
     text-decoration: none;
@@ -131,7 +187,6 @@ footer {
     }
 
     .component {
-        /* width: 15rem; */
         height: 18rem;
         display: grid;
         grid-template-rows: 3fr 1fr 0fr 1fr;
