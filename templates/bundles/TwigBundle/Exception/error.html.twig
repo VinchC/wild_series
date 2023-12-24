@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+	{% set page_title = "Problème temporaire" %}
+	{% set page_description = "Redirection suite à un problème temporaire" %}
+	{{ parent() }}
+	<title>
+		{% block title %}
+			{{ page_title }}
+		{% endblock %}
+	</title>
+{% endblock %}
+
+{% block body %}
+	<header>
+		{% block navbar %}{% endblock %}
+	</header>
+	{% block content %}
+		<h1>Un problème est survenu</h1>
+
+		<p>
+			Nous vous invitons à réessayer dans quelques minutes.
+		</p>
+		<p>
+			Vous pouvez retourner sur la page d'accueil
+			<a href="{{ path('app_index') }}">ici</a>.
+		</p>
+	{% endblock %}
+{% endblock %}
