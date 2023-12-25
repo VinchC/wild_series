@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use MyPasswordRequirements;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -31,7 +32,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Prénom'
                 ])
             ->add('agreeTerms', CheckboxType::class, [
-                                'mapped' => false,
+                'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Vous devez accepter les termes du site.',
@@ -49,16 +50,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Mot de passe',
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de renseigner votre mot de passe.',
-                    ]),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Votre mot de passe doit contenir {{ limit }} caractères.',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
+                    new MyPasswordRequirements()
                 ],
+                'invalid_message' => 'Votre mot de passe doit contenir au moins un chiffre et un caractère spécial.'
             ])
         ;
     }

@@ -6,10 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cette adresse mail.')]
@@ -20,19 +21,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\Email(
-        message: "L\'adresse mail renseignée {{ value }} n\'est pas valide.",
-    )]
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: "L'adresse mail renseignée {{ value }} n'est pas valide.",
+    )]
     private ?string $email = null;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
     #[ORM\Column(length: 100)]
+    #[Assert\Regex(        
+        pattern: '/\d/',
+        match: false,
+        message: 'Votre prénom ne doit pas comporter de chiffre.',
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column]
+    #[Assert\NotCompromisedPassword]
+    #[Assert\PasswordStrength([
+        'minScore' => PasswordStrength::STRENGTH_VERY_STRONG,
+        'message' => "Votre mot de passe n'est pas assez robuste."
+    ])]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]

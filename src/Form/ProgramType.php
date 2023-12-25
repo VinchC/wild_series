@@ -30,6 +30,12 @@ class ProgramType extends AbstractType
                 ],
                 'label' => 'Synopsis'
             ])
+            ->add('officialWebsite', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Indiquez le lien vers le site officiel',
+                ],
+                'label' => 'Site officiel'
+            ])
             ->add('posterFile', DropzoneType::class, [
             // ->add('posterFile', VichFileType::class, [
                 'required'      => false,
