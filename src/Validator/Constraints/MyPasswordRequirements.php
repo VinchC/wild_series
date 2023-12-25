@@ -19,6 +19,14 @@ class MyPasswordRequirements extends Compound {
                 'message' => 'Votre mot de passe doit contenir au moins un chiffre.'
             ]),
             new Assert\Regex([
+                'pattern' => '/[a-z]+/', 
+                'message' => 'Votre mot de passe doit contenir au moins une lettre minuscule.'
+            ]),
+            new Assert\Regex([
+                'pattern' => '/[A-Z]+/', 
+                'message' => 'Votre mot de passe doit contenir au moins une lettre majuscule.'
+            ]),
+            new Assert\Regex([
                 'pattern' => '/[#?!@$%^&*-]+/i', 
                 'message' => 'Votre mot de passe doit contenir au moins un caractère spécial.'
             ]),
