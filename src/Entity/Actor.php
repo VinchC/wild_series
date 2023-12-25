@@ -22,14 +22,17 @@ class Actor
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $firstname = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(
+        message: "t'as oublié de me renseigner !"
+    )]
+    private $firstname = null;
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $birth_date = null;
+    private ?DateTimeInterface $birth_date = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $poster = null;

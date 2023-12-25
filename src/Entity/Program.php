@@ -28,25 +28,41 @@ class Program
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Assert\NotNull(
+        message: "ce champ ne peut pas être nul.",
+        payload: ['severity' => 'error']
+    )]
     #[Assert\NotBlank(
-        message: "t'as oublié de me renseigner !"
+        message: "Le renseignement de ce champ est obligatoire.",
+        payload: ['severity' => 'error']
     )]
     #[Assert\Length(
         max: 255,
-        maxMessage: "C'est beaucoup trop long (moins de 255 caractères) !"
+        maxMessage: "La valeur renseignée doit faire moins de 255 caractères."
     )]
     private $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(
-        message: "t'as oublié de me renseigner !"
+        message: "Le renseignement de ce champ est obligatoire."
+    )]
+    #[Assert\Length(
+        min: 20,
+        minMessage: "La valeur renseignée doit faire plus de 20 caractères."
     )]
     #[Assert\Regex(
         pattern: '/plus belle la vie/',
         match: false,
         message: 'On parle de vraies séries ici',
+        payload: ['severity' => 'warning']
     )]
     private $synopsis = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Assert\Url(
+        message: "Merci de renseigner une adresse url valide."
+    )]
+    private ?string $officialWebsite = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $poster = null;
@@ -268,6 +284,26 @@ class Program
         if ($this->viewers->removeElement($user)) {
             $user->removeFromWatchlist($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of officialWebsite
+     */ 
+    public function getOfficialWebsite()
+    {
+        return $this->officialWebsite;
+    }
+
+    /**
+     * Set the value of officialWebsite
+     *
+     * @return  self
+     */ 
+    public function setOfficialWebsite($officialWebsite)
+    {
+        $this->officialWebsite = $officialWebsite;
 
         return $this;
     }

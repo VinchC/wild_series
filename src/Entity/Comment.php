@@ -30,6 +30,10 @@ class Comment
 
     #[ORM\Column]
     #[Assert\Positive]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'Les valeurs autorisées sont entre 1 et 5.',
+    )]
     private ?int $rate = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
