@@ -50,18 +50,20 @@ class Program
 
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(
-        message: "Le renseignement de ce champ est obligatoire."
-    )]
-    #[Assert\Length(
-        min: 20,
-        minMessage: "La valeur renseignée doit faire plus de 20 caractères."
-    )]
+    #[Assert\Sequentially([
+        new Assert\NotBlank(
+            message: "Le renseignement de ce champ est obligatoire."
+        ),
+        new Assert\Length(
+            min: 20,
+            minMessage: "La valeur renseignée doit faire plus de 20 caractères.",
+        )
+        ])]
     #[Assert\Regex(
         pattern: '/plus belle la vie/',
         match: false,
         message: 'On parle de vraies séries ici',
-        payload: ['severity' => 'warning']
+        payload: ['severity' => 'warning'],
     )]
     private $synopsis = null;
 
@@ -89,9 +91,9 @@ class Program
     )]
     #[Assert\Image(
         minWidth: 300,
-        maxWidth: 1500,
+        maxWidth: 3000,
         minHeight: 100,
-        maxHeight: 500,
+        maxHeight: 1000,
         allowPortrait: false,
         allowPortraitMessage: 'Les images au format portrait ne sont pas autorisées.'
     )]

@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\User;
-use MyPasswordRequirements;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Validator\Constraints\PasswordRequirements;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -49,9 +49,8 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Mot de passe',
                 'constraints' => [
-                    new MyPasswordRequirements()
+                    new PasswordRequirements()
                 ],
-                'invalid_message' => 'Votre mot de passe doit contenir au moins un chiffre et un caractère spécial.'
             ])
         ;
     }

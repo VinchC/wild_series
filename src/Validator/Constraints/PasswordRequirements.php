@@ -1,10 +1,13 @@
 <?php
 
+namespace App\Validator\Constraints;
+
 use Symfony\Component\Validator\Constraints\Compound;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class MyPasswordRequirements extends Compound {
-
+#[\Attribute]
+class PasswordRequirements extends Compound 
+{
     protected function getConstraints(array $options): array
     {
         return [
@@ -34,15 +37,16 @@ class MyPasswordRequirements extends Compound {
                 'constraints' => [
                     new Assert\Regex(
                         pattern: '/#/', 
-                        message: 'Votre mot de passe doit contenir au moins un caractère # ou un caractère $.'
+                        message: 'Votre mot de passe doit contenir au moins un caractère # ou un caractère !.'
                     ),
                     new Assert\Regex(
                         pattern: '/!/', 
-                        message: 'Votre mot de passe doit contenir au moins un caractère # ou un caractère $.'
+                        message: 'Votre mot de passe doit contenir au moins un caractère # ou un caractère !.'
                     ),
                 ],
                 'message' => "Votre mot de passe doit respecter au moins l'une des deux contraintes suivantes :"
-            ])
+            ]),
+            new Assert\NotCompromisedPassword(),
         ];
     }
 }
