@@ -30,6 +30,19 @@ class MyPasswordRequirements extends Compound {
                 'pattern' => '/[#?!@$%^&*-]+/i', 
                 'message' => 'Votre mot de passe doit contenir au moins un caractère spécial.'
             ]),
+            new Assert\AtLeastOneOf([
+                'constraints' => [
+                    new Assert\Regex(
+                        pattern: '/#/', 
+                        message: 'Votre mot de passe doit contenir au moins un caractère # ou un caractère $.'
+                    ),
+                    new Assert\Regex(
+                        pattern: '/!/', 
+                        message: 'Votre mot de passe doit contenir au moins un caractère # ou un caractère $.'
+                    ),
+                ],
+                'message' => "Votre mot de passe doit respecter au moins l'une des deux contraintes suivantes :"
+            ])
         ];
     }
 }

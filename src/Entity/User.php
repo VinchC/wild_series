@@ -21,14 +21,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+
+
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email(
         message: "L'adresse mail renseignée {{ value }} n'est pas valide.",
     )]
     private ?string $email = null;
 
+
+
     #[ORM\Column(type: 'json')]
     private array $roles = [];
+
+
 
     #[ORM\Column(length: 100)]
     #[Assert\Regex(        
@@ -38,21 +44,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $firstName = null;
 
+
+
     #[ORM\Column]
     private ?string $password = null;
+
+
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
     private Collection $comments;
 
+
+
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Program::class)]
     private Collection $programs;
+
+
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+
+
     #[ORM\ManyToMany(targetEntity: Program::class, inversedBy: 'viewers')]
     #[ORM\JoinTable(name:'watchlist')]
     private Collection $watchlist;
+
+
 
     public function __construct()
     {

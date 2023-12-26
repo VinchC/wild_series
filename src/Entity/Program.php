@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 #[UniqueEntity(
     'title',
-    message: 'ce titre existe déjà'
+    message: 'Ce titre existe déjà.'
 )]
 #[Vich\Uploadable]
 class Program
@@ -26,6 +26,8 @@ class Program
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Assert\NotNull(
@@ -45,6 +47,8 @@ class Program
         message: "Le nom ne doit pas être {{ compared_value }}.",)]
     private $title = null;
 
+
+
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(
         message: "Le renseignement de ce champ est obligatoire."
@@ -61,44 +65,75 @@ class Program
     )]
     private $synopsis = null;
 
+
+
     #[ORM\Column(nullable: true)]
     #[Assert\Url(
         message: "Merci de renseigner une adresse url valide."
     )]
-    #[Assert\Unique]
     private ?string $officialWebsite = null;
+
+
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $poster = null;
 
+
+
     #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
     #[Assert\File(
         maxSize: '2M',
-        mimeTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
+        maxSizeMessage: 'Le volume du fichier doit faire inférieur à 2M',
+        extensions: ['jpeg', 'png', 'jpg', 'webp'],
+        extensionsMessage: 'Les extensions autorisées sont .jpg, .png, .webp et .jpg',
+    )]
+    #[Assert\Image(
+        minWidth: 300,
+        maxWidth: 1500,
+        minHeight: 100,
+        maxHeight: 500,
+        allowPortrait: false,
+        allowPortraitMessage: 'Les images au format portrait ne sont pas autorisées.'
     )]
     private ?File $posterFile = null;
 
+
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DatetimeInterface $updatedAt = null;
+
+
 
     #[ORM\ManyToOne(inversedBy: 'programs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
+
+
     #[ORM\OneToMany(mappedBy: 'program', targetEntity: Season::class)]
     private Collection $seasons;
+
+
 
     #[ORM\ManyToMany(targetEntity: Actor::class, mappedBy: 'programs')]
     private Collection $actors;
 
+
+
     #[ORM\Column(length: 255)]
     private ?string $programSlug = null;
+
+
 
     #[ORM\ManyToOne(inversedBy: 'programs')]
     private ?User $owner = null;
 
+
+
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'watchlist')]
     private Collection $viewers;
+
+
 
     public function __construct()
     {
