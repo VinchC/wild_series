@@ -17,6 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[Vich\Uploadable]
 class Actor
 {
+    public const EXPERIENCE = ['Débutant', '2 ans', '5 ans', '10 ans', '10 ans et plus'];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -31,7 +33,14 @@ class Actor
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
+    #[ORM\Column(length: 255)]
+    #[Assert\Choice(
+        choices: Actor::EXPERIENCE, 
+        message: 'Choisissez une expérience parmi celles proposées.')]
+    private ?string $experience = null;
+
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\LessThan('today')]
     private ?DateTimeInterface $birth_date = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -159,5 +168,25 @@ class Actor
     public function getName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    /**
+     * Get the value of experience
+     */ 
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * Set the value of experience
+     *
+     * @return  self
+     */ 
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
+
+        return $this;
     }
 }

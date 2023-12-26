@@ -4,11 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use App\Validator\Constraints as Asserts;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\PasswordStrength;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -21,14 +21,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+
+
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email(
         message: "L'adresse mail renseignée {{ value }} n'est pas valide.",
     )]
     private ?string $email = null;
 
+
+
     #[ORM\Column(type: 'json')]
     private array $roles = [];
+
+
 
     #[ORM\Column(length: 100)]
     #[Assert\Regex(        
@@ -38,26 +44,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $firstName = null;
 
+
+
     #[ORM\Column]
-    #[Assert\NotCompromisedPassword]
-    #[Assert\PasswordStrength([
-        'minScore' => PasswordStrength::STRENGTH_VERY_STRONG,
-        'message' => "Votre mot de passe n'est pas assez robuste."
-    ])]
     private ?string $password = null;
+
+
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
     private Collection $comments;
 
+
+
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Program::class)]
     private Collection $programs;
+
+
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+
+
     #[ORM\ManyToMany(targetEntity: Program::class, inversedBy: 'viewers')]
     #[ORM\JoinTable(name:'watchlist')]
     private Collection $watchlist;
+
+
 
     public function __construct()
     {

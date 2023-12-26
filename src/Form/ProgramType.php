@@ -38,12 +38,10 @@ class ProgramType extends AbstractType
             ])
             ->add('posterFile', DropzoneType::class, [
             // ->add('posterFile', VichFileType::class, [
-                'required'      => false,
-                // 'allow_delete'  => false,
-                // 'download_uri' => false,
+                'required' => true,
                 'label' => 'Image',
                 'attr' => [
-                'placeholder' => 'Copiez/glissez une image ou cliquez pour parcourir'
+                    'placeholder' => 'Copiez/glissez une image ou cliquez pour parcourir'
                 ]
             ])
             ->add('category', EntityType::class, [

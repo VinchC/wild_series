@@ -15,6 +15,7 @@ class SeasonType extends AbstractType
             ->add('number', null, [
                 'attr' => [
                     'placeholder' => 'Indiquez un nombre',
+                    'min' => 1,
                 ],
                 'label' => 'Numéro'
                 ])

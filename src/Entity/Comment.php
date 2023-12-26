@@ -34,6 +34,11 @@ class Comment
         type: 'integer',
         message: 'Les valeurs autorisées sont entre 1 et 5.',
     )]
+    #[Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: 'Les valeurs autorisées sont entre {{ min }} et {{ max }}.',
+    )]
     private ?int $rate = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
