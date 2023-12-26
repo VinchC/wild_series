@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ActorType extends AbstractType
 {
@@ -27,6 +28,13 @@ class ActorType extends AbstractType
                     'placeholder' => 'Indiquez le nom de famille',
                 ],
                 'label' => 'Nom de famille'
+                ])
+            ->add('experience', ChoiceType::class, [
+                'choices' => Actor::EXPERIENCE,
+                'attr' => [
+                    'placeholder' => "Indiquez l'expérience parmi les choix proposés.",
+                ],
+                'label' => 'Expérience'
                 ])
             ->add('birth_date', null, [
                 'attr' => [

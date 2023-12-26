@@ -40,6 +40,9 @@ class Program
         max: 255,
         maxMessage: "La valeur renseignée doit faire moins de 255 caractères."
     )]
+    #[Assert\NotEqualTo(
+        value: 'Test',
+        message: "Le nom ne doit pas être {{ compared_value }}.",)]
     private $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -62,6 +65,7 @@ class Program
     #[Assert\Url(
         message: "Merci de renseigner une adresse url valide."
     )]
+    #[Assert\Unique]
     private ?string $officialWebsite = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

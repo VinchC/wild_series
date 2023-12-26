@@ -27,6 +27,7 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
                 $actor = new Actor();
                 $actor->setFirstName($faker->firstName());
                 $actor->setLastName($faker->lastName());
+                $actor->setExperience(2);
                 $actor->setBirthDate($faker->dateTime());
                 for ($programNumber = 0; $programNumber < 3; $programNumber++) {
                     $programName = $this->slugger->slug(ProgramFixtures::PROGRAMS[$programNumber]['title']);

@@ -24,13 +24,27 @@ class Season
     #[ORM\Column]
     #[Assert\NotBlank]
     #[Assert\Positive]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'La valeur renseignée doit être positive.',
+    )]
     private ?int $number = null;
 
     #[ORM\Column]
     #[Assert\Length(exactly: 4)]
+    #[Assert\LessThanOrEqual(
+        value: 2024,
+        message: 'La date doit être inférieure ou égale à 2024.')]
+    #[Assert\GreaterThanOrEqual(
+        value: 1951,
+        message: 'La date doit être égale ou supérieure à 1951.')]
     private ?int $year = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(
+        min: 20,
+        minMessage: "La valeur renseignée doit faire plus de 20 caractères."
+    )]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class)]
