@@ -70,6 +70,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinTable(name:'watchlist')]
     private Collection $watchlist;
 
+    #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'fans')]
+    #[ORM\JoinTable(name:'favorite_actors')]
+    private Collection $favoriteActors;
+
 
 
     public function __construct()
@@ -77,6 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->comments = new ArrayCollection();
         $this->programs = new ArrayCollection();
         $this->watchlist = new ArrayCollection();
+        $this->favoriteActors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -254,8 +259,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isInWatchlist(Program $program): bool
+    // public function isInWatchlist(Program $program): bool
+    // {
+    //     return $this->watchlist->contains($program);
+    // }
+
+    /**
+     * @return Collection<int, Actor>
+     */
+    public function getFavoriteActors(): Collection
     {
-        return $this->watchlist->contains($program);
+        return $this->favoriteActors;
+    }
+
+    public function addFavoriteActor(Actor $favoriteActor): static
+    {
+        if (!$this->favoriteActors->contains($favoriteActor)) {
+            $this->favoriteActors->add($favoriteActor);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteActor(Actor $favoriteActor): static
+    {
+        $this->favoriteActors->removeElement($favoriteActor);
+
+        return $this;
     }
 }
