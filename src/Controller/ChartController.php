@@ -20,7 +20,7 @@ class ChartController extends AbstractController
                     'label' => '# of commits on my GitHub account per month',
                     'backgroundColor' => 'rgb(45, 6, 124, .7)',
                     'borderColor' => 'rgb(45, 6, 124)',
-                    'data' => [0, 9, 12, 19, 7, 14, 0, 3, 12, 26, 72],
+                    'data' => [0, 9, 12, 19, 7, 14, 0, 3, 12, 26, 147],
                     'tension' => 0.5,
                 ],
                 [

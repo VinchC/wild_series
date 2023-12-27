@@ -16,6 +16,8 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
+
+
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(
         message: "t'as oublié de me renseigner !"
@@ -28,14 +30,20 @@ class Category
     )]
     private $name;
 
+
+
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Program::class)]
     private ?Collection $programs;
+
+
 
     public function __construct()
     {
         $this->programs = new ArrayCollection();
     }
 
+
+    
     public function getId(): ?int
     {
         return $this->id;

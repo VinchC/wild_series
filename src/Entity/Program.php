@@ -142,6 +142,18 @@ class Program
     private Collection $viewers;
 
 
+    
+    #[ORM\Column(nullable: true)]
+    #[Assert\GreaterThan(0)]
+    #[Assert\When(
+        expression: 'this.getViewers() >= "10"',
+        constraints: [
+            new Assert\LessThanOrEqual(100, message: 'The value should be between 1 and 100!')
+        ],
+    )]
+    private ?int $recommendationRate = null;
+
+
 
     public function __construct()
     {
@@ -371,6 +383,26 @@ class Program
     public function setFamilyShow($familyShow)
     {
         $this->familyShow = $familyShow;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of recommendationRate
+     */ 
+    public function getRecommendationRate()
+    {
+        return $this->recommendationRate;
+    }
+
+    /**
+     * Set the value of recommendationRate
+     *
+     * @return  self
+     */ 
+    public function setRecommendationRate($recommendationRate)
+    {
+        $this->recommendationRate = $recommendationRate;
 
         return $this;
     }
