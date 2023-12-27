@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,6 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -20,6 +20,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     message: 'Ce titre existe déjà.'
 )]
 #[Vich\Uploadable]
+#[Assert\Expression(
+    "this.getCategory().getName() in ['Comedie', 'Musique'] or !this.getFamilyShow()",
+    message: "Si c'est un spectacle pour toute la famille, la catégorie devrait être Comedie ou Musique.",
+)]
 class Program
 {
     #[ORM\Id]
@@ -80,6 +84,8 @@ class Program
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $poster = null;
 
+    #[ORM\Column]
+    private ?bool $familyShow = null;
 
 
     #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
@@ -91,9 +97,9 @@ class Program
     )]
     #[Assert\Image(
         minWidth: 300,
-        maxWidth: 3000,
+        maxWidth: 6000,
         minHeight: 100,
-        maxHeight: 1000,
+        maxHeight: 2000,
         allowPortrait: false,
         allowPortraitMessage: 'Les images au format portrait ne sont pas autorisées.'
     )]
@@ -118,6 +124,12 @@ class Program
 
 
     #[ORM\ManyToMany(targetEntity: Actor::class, mappedBy: 'programs')]
+    #[Assert\Count(
+        min: 1,
+        max: 5,
+        minMessage: 'Vous devez choisir au moins un acteur.',
+        maxMessage: 'Vous ne pouvez pas choisir plus que {{ limit }} acteurs.',
+    )]
     private Collection $actors;
 
 
@@ -134,6 +146,18 @@ class Program
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'watchlist')]
     private Collection $viewers;
+
+
+    
+    #[ORM\Column(nullable: true)]
+    #[Assert\GreaterThan(0)]
+    #[Assert\When(
+        expression: 'this.getViewers() >= "10"',
+        constraints: [
+            new Assert\LessThanOrEqual(100, message: 'The value should be between 1 and 100!')
+        ],
+    )]
+    private ?int $recommendationRate = null;
 
 
 
@@ -345,6 +369,46 @@ class Program
     public function setOfficialWebsite($officialWebsite)
     {
         $this->officialWebsite = $officialWebsite;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of familyShow
+     */ 
+    public function getFamilyShow()
+    {
+        return $this->familyShow;
+    }
+
+    /**
+     * Set the value of familyShow
+     *
+     * @return  self
+     */ 
+    public function setFamilyShow($familyShow)
+    {
+        $this->familyShow = $familyShow;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of recommendationRate
+     */ 
+    public function getRecommendationRate()
+    {
+        return $this->recommendationRate;
+    }
+
+    /**
+     * Set the value of recommendationRate
+     *
+     * @return  self
+     */ 
+    public function setRecommendationRate($recommendationRate)
+    {
+        $this->recommendationRate = $recommendationRate;
 
         return $this;
     }

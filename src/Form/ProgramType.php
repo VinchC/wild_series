@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProgramType extends AbstractType
 {
@@ -29,6 +30,15 @@ class ProgramType extends AbstractType
                     'placeholder' => 'Indiquez le synopsis',
                 ],
                 'label' => 'Synopsis'
+            ])
+            ->add('familyShow', ChoiceType::class, [
+                'choices' => [
+                    'Oui' => true, 
+                    'Non' => false
+                ],
+                'multiple' => false,
+                'expanded' => true,
+                'label' => 'Pour tous publics ?'
             ])
             ->add('officialWebsite', TextType::class, [
                 'attr' => [

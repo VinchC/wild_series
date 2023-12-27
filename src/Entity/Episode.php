@@ -17,31 +17,47 @@ class Episode
     #[ORM\Column]
     private ?int $id = null;
 
+
+
     #[ORM\ManyToOne(inversedBy: 'episodes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Season $season = null;
 
+
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     private ?string $title = null;
+
+
 
     #[ORM\Column]
     #[Assert\NotBlank]
     #[Assert\Positive]
     private ?int $number = null;
 
+
+
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
+
+
 
     #[ORM\Column]
     private ?int $duration = null;
 
+
+
     #[ORM\Column(length: 255)]
     private ?string $episodeSlug = null;
+
+
 
     #[ORM\OneToMany(mappedBy: 'episode', targetEntity: Comment::class)]
     private Collection $comments;
 
+
+    
     public function __construct()
     {
         $this->comments = new ArrayCollection();
