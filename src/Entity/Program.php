@@ -124,6 +124,12 @@ class Program
 
 
     #[ORM\ManyToMany(targetEntity: Actor::class, mappedBy: 'programs')]
+    #[Assert\Count(
+        min: 1,
+        max: 5,
+        minMessage: 'Vous devez choisir au moins un acteur.',
+        maxMessage: 'Vous ne pouvez pas choisir plus que {{ limit }} acteurs.',
+    )]
     private Collection $actors;
 
 
