@@ -10,6 +10,8 @@
 		{{ app.user.firstname }}
 	</h1>
 
+	{{ user.roles|format_args }}
+	{{ user.roles|format_args_as_text }}
 	<p>{{ user.firstname }}</p>
 	<p>{{ user.email }}</p>
 	<p>

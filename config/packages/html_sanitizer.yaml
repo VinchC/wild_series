@@ -1,0 +1,13 @@
+# config/packages/html_sanitizer.yaml
+framework:
+  html_sanitizer:
+    sanitizers:
+      app.post_sanitizer:
+        # ...
+        allow_attributes:
+          # allow the "data-attr" on all safe elements...
+          data-attr: "*"
+
+        drop_attributes:
+          # disallows "style' on any allowed element
+          style: "*"

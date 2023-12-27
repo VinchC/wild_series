@@ -21,11 +21,11 @@
 			</tr>
 			<tr>
 				<th>Prénom</th>
-				<td>{{ actor.firstname }}</td>
+				<td>{{ actor.firstname|sanitize_html(sanitizer = "default") }}</td>
 			</tr>
 			<tr>
 				<th>Nom de famille</th>
-				<td>{{ actor.lastname }}</td>
+				<td>{{ actor.lastname}}</td>
 			</tr>
 			<tr>
 				<th>Expérience</th>
