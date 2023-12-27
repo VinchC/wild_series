@@ -59,9 +59,13 @@ class Actor
     #[ORM\ManyToMany(targetEntity: Program::class, inversedBy: 'actors')]
     private Collection $programs;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteActors')]
+    private Collection $fans;
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
+        $this->fans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,6 +190,33 @@ class Actor
     public function setExperience($experience)
     {
         $this->experience = $experience;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFans(): Collection
+    {
+        return $this->fans;
+    }
+
+    public function addFan(User $fan): static
+    {
+        if (!$this->fans->contains($fan)) {
+            $this->fans->add($fan);
+            $fan->addFavoriteActor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFan(User $fan): static
+    {
+        if ($this->fans->removeElement($fan)) {
+            $fan->removeFavoriteActor($this);
+        }
 
         return $this;
     }
