@@ -18,6 +18,16 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/season">Saisons</a>
 				</li>
+
+				<li class="nav-item">
+					{% if app.user %}
+						{% if 'ROLE_ADMIN' in app.user.roles %}
+							<li>
+								<a class="nav-link" href="{{ path('admin') }}">Dashboard</a>
+							</li>
+						{% endif %}
+					{% endif %}
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/chartjs">Tableau</a>
 				</li>
